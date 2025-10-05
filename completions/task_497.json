@@ -1,0 +1,28 @@
+{
+  "task_id": 497,
+  "description": "Calculate the surface area of a cone given its radius and height. The formula is \u03c0r(r + sqrt(r\u00b2 + h\u00b2)), where r is the radius, h is the height, and sqrt(r\u00b2 + h\u00b2) is the slant height.",
+  "input_format": "Two space-separated numbers representing the radius and height of the cone.",
+  "output_format": "A single floating-point number representing the total surface area of the cone, printed with 14 decimal places.",
+  "prompt": "; Calculate the surface area of a cone given its radius and height. The formula is \u03c0r(r + sqrt(r\u00b2 + h\u00b2)), where r is the radius, h is the height, and sqrt(r\u00b2 + h\u00b2) is the slant height.\n; Input format: Two space-separated numbers representing the radius and height of the cone.\n; Output format: A single floating-point number representing the total surface area of the cone, printed with 14 decimal places.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (surface-area-of-cone radius height)\n  (let ((slant-height (sqrt (+ (sqr radius) (sqr height)))))\n    (* pi radius (+ radius slant-height))))\n\n; Example usage:\n; (surface-area-of-cone 3 4) ; Expected output: 75.39822368615503\n; (surface-area-of-cone 5 12) ; Expected output: 282.74333882308138",
+    "(define (surface-area-of-cone radius height)\n  (* pi radius (+ radius (sqrt (+ (sqr radius) (sqr height))))))\n\n; Example usage:\n; (surface-area-of-cone 3 4) => 75.39822368615503\n; (surface-area-of-cone 5 12) => 314.1592653589793",
+    "(require math)\n\n(define (surface-area-of-cone radius height)\n  (* pi radius (+ radius (sqrt (+ (sqr radius) (sqr height))))))\n\n; Example usage:\n; (surface-area-of-cone 3 4) ; Expected output: 75.39822368615503\n; (surface-area-of-cone 5 12) ; Expected output: 282.7433388230814",
+    "(define (surface-area-of-cone radius height)\n  (* pi radius (+ radius (sqrt (+ (sqr radius) (sqr height))))))\n\n; Example usage:\n; (surface-area-of-cone 3 4) ; Expected output: 75.39822368615503\n; (surface-area-of-cone 5 12) ; Expected output: 314.1592653589793",
+    "(define (surface-area-of-cone radius height)\n  (let ((slant-height (sqrt (+ (sqr radius) (sqr height)))))\n    (* pi radius (+ radius slant-height))))\n\n; Example usage:\n; (surface-area-of-cone 3 4) ; Expected output: 75.39822368615503\n; (surface-area-of-cone 5 12) ; Expected output: 282.74333882308138"
+  ],
+  "test_cases": [
+    {
+      "input": "5 12",
+      "output": "282.7433388230814"
+    },
+    {
+      "input": "10 15",
+      "output": "880.5179353159282"
+    },
+    {
+      "input": "19 17",
+      "output": "2655.923961165254"
+    }
+  ]
+}

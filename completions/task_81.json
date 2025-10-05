@@ -1,0 +1,28 @@
+{
+  "task_id": 81,
+  "description": "Write a function to zip the two given tuples. The tuples are zipped by pairing elements at the same index, cycling through the shorter tuple as needed.",
+  "input_format": "The input consists of two lines. The first line contains space-separated integers representing the elements of the first tuple. The second line contains space-separated integers representing the elements of the second tuple.",
+  "output_format": "The output consists of multiple lines. Each line contains two space-separated integers representing a pair from the zipped tuples. The pairs are ordered according to the zipping process, cycling through the shorter tuple as needed.",
+  "prompt": "; Write a function to zip the two given tuples. The tuples are zipped by pairing elements at the same index, cycling through the shorter tuple as needed.\n; Input format: The input consists of two lines. The first line contains space-separated integers representing the elements of the first tuple. The second line contains space-separated integers representing the elements of the second tuple.\n; Output format: The output consists of multiple lines. Each line contains two space-separated integers representing a pair from the zipped tuples. The pairs are ordered according to the zipping process, cycling through the shorter tuple as needed.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (zip-tuples tuple1 tuple2)\n  (let loop ((i 0) (result '()))\n    (if (or (>= i (length tuple1)) (>= i (length tuple2)))\n        result\n        (loop (+ i 1) (cons (list (list-ref tuple1 i) (list-ref tuple2 i)) result)))))\n\n(define (main)\n  (let ((tuple1 (map string->number (string-split (read-line) #\\space)))\n        (tuple2 (map string->number (string-split (read-line) #\\space))))\n    (for-each (lambda (pair) (displayln (apply format \"~a ~a\" pair)))\n              (zip-tuples tuple1 tuple2))))\n\n(main)",
+    "(define (zip-tuples tuple1 tuple2)\n  (let loop ([i 0])\n    (if (or (>= i (length tuple1)) (>= i (length tuple2)))\n        '()\n        (cons (list (list-ref tuple1 i) (list-ref tuple2 i))\n              (loop (add1 i))))))\n\n(define (main)\n  (let ([tuple1 (map string->number (string-split (read-line) #\\space))]\n        [tuple2 (map string->number (string-split (read-line) #\\space))])\n    (displayln (zip-tuples tuple1 tuple2))))\n\n(main)",
+    "(define (zip-tuples tuple1 tuple2)\n  (let loop ([i 0] [tuple1 tuple1] [tuple2 tuple2])\n    (if (or (null? tuple1) (null? tuple2))\n        '()\n        (cons (list (car tuple1) (car tuple2)) (loop (add1 i) (cdr tuple1) (cdr tuple2))))))\n\n(define (main)\n  (let ([tuple1 (map (lambda (x) (string->number (string x))) (read-line))]\n        [tuple2 (map (lambda (x) (string->number (string x))) (read-line))])\n    (displayln (zip-tuples tuple1 tuple2))))\n\n(main)",
+    "(define (zip t1 t2)\n  (let loop ([t1 t1] [t2 t2] [result '()])\n    (if (or (null? t1) (null? t2))\n        result\n        (loop (cdr t1) (cdr t2) (cons (list (car t1) (car t2)) result)))))\n\n(define (main)\n  (let ([t1 (map string->number (string-split (read-line) #\\space))]\n        [t2 (map string->number (string-split (read-line) #\\space))])\n    (for ([pair (zip t1 t2)])\n      (displayln (format \"~a ~a\" (car pair) (cdr pair))))))\n\n(main)",
+    "(define (zip t1 t2)\n  (let loop ([t1 t1] [t2 t2] [result '()])\n    (cond\n      [(null? t1) result]\n      [(null? t2) result]\n      [else (loop (cdr t1) (cdr t2) (cons (list (car t1) (car t2)) result))])))\n\n(define (main)\n  (let ([t1 (map (lambda (x) (string->number (string x))) (string-split (read-line) #\\space))]\n        [t2 (map (lambda (x) (string->number (string x))) (string-split (read-line) #\\space))])\n    (for ([pair (zip t1 t2)])\n      (displayln (format \"~a ~a\" (car pair) (cdr pair))))))\n; Sample Input:\n; 1 2 3 4\n; 5 6 7 8\n; Sample Output:\n; 1 5\n; 2 6\n; 3 7\n; 4 8"
+  ],
+  "test_cases": [
+    {
+      "input": "7 8 4 5 9 10\n1 5 6",
+      "output": "7 1\n8 5\n4 6\n5 1\n9 5\n10 6"
+    },
+    {
+      "input": "8 9 5 6 10 11\n2 6 7",
+      "output": "8 2\n9 6\n5 7\n6 2\n10 6\n11 7"
+    },
+    {
+      "input": "9 10 6 7 11 12\n3 7 8",
+      "output": "9 3\n10 7\n6 8\n7 3\n11 7\n12 8"
+    }
+  ]
+}

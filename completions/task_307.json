@@ -1,0 +1,28 @@
+{
+  "task_id": 307,
+  "description": "Write a function to modify a tuple by replacing the element at a specified index with a list containing a given value. The function returns the new tuple.",
+  "input_format": "The input consists of three lines. The first line is a Python tuple literal representing the original tuple. The second line contains an integer representing the index. The third line contains an integer representing the value to insert into the tuple as a single-element list.",
+  "output_format": "The output is a single line containing the modified tuple as a Python tuple literal.",
+  "prompt": "; Write a function to modify a tuple by replacing the element at a specified index with a list containing a given value. The function returns the new tuple.\n; Input format: The input consists of three lines. The first line is a Python tuple literal representing the original tuple. The second line contains an integer representing the index. The third line contains an integer representing the value to insert into the tuple as a single-element list.\n; Output format: The output is a single line containing the modified tuple as a Python tuple literal.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (modify-tuple original-index value)\n  (let ([original-tuple (read)])\n    (if (and (list? original-tuple) (integer? original-index) (integer? value))\n        (let ([new-tuple (list-copy original-tuple)])\n          (set! (list-ref new-tuple original-index) (list value))\n          new-tuple)\n        (error \"Invalid input format\"))))\n\n(modify-tuple 2 5)",
+    "(define (modify-tuple original-index value)\n  (define (replace-element lst index new-element)\n    (if (and (list? lst) (number? index))\n        (if (zero? index)\n            (cons new-element (cdr lst))\n            (cons (car lst) (replace-element (cdr lst) (- index 1) new-element)))\n        lst))\n\n  (replace-element original-index value))\n\n(modify-tuple 2 5)",
+    "(define (modify-tuple original-index value)\n  (define (replace-element lst index)\n    (if (and (list? lst) (number? index))\n        (if (zero? index)\n            (cons value lst)\n            (cons (car lst) (replace-element (cdr lst) (- index 1))))\n        lst))\n\n  (replace-element original-index value))\n\n(modify-tuple 2 5)",
+    "(define (modify-tuple original-index value)\n  (let ([original-tuple (list->tuple (read))])\n    (if (and (integer? original-index) (<= 0 original-index (length original-tuple)))\n        (list->tuple (replace-at original-index (list value) original-tuple))\n        (error \"Invalid input\"))))\n\n(define (replace-at index replacement lst)\n  (if (and (integer? index) (<= 0 index (length lst)))\n      (cons replacement (take lst index) (drop lst (+ index 1)))\n      (error \"Invalid input\")))\n\n(define (list->tuple lst)\n  (if (null? lst)\n      '()\n      (cons (car lst) (list->tuple (cdr lst)))))\n\n(define (tuple->list lst)\n  (if (null? lst)\n      '()\n      (cons (car lst) (tuple->list (cdr lst)))))\n\n(define (read)\n  (read-line))\n\n(define (main)\n  (let ([original-index (read)]\n        [value (read)]\n        [original-tuple (read)])\n    (display (modify-tuple original-index value))))\n\n(main)",
+    "(define (modify-tuple original-index value)\n  (let ([original (list->tuple (list->list original-index))])\n    (list->tuple (list->list (replace original-index (list value) original)))))\n\n(modify-tuple 1 5)"
+  ],
+  "test_cases": [
+    {
+      "input": "('HELLO', 5, [], True)\n2\n50",
+      "output": "('HELLO', 5, [50], True)"
+    },
+    {
+      "input": "('HELLO', 5, [], True)\n2\n100",
+      "output": "('HELLO', 5, [100], True)"
+    },
+    {
+      "input": "('HELLO', 5, [], True)\n2\n500",
+      "output": "('HELLO', 5, [500], True)"
+    }
+  ]
+}

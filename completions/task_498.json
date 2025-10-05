@@ -1,0 +1,28 @@
+{
+  "task_id": 498,
+  "description": "Write a Python function to find the GCD of two positive integers.",
+  "input_format": "Two space-separated integers a and b (1 <= a, b <= 10^9).",
+  "output_format": "A single integer: the GCD of a and b.",
+  "prompt": "; Write a Python function to find the GCD of two positive integers.\n; Input format: Two space-separated integers a and b (1 <= a, b <= 10^9).\n; Output format: A single integer: the GCD of a and b.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (gcd a b)\n  (if (= b 0)\n      a\n      (gcd b (modulo a b))))\n\n; Example usage:\n; (gcd 48 18) => 6\n; (gcd 56 98) => 14",
+    "(define (gcd a b)\n  (if (zero? b)\n      a\n      (gcd b (modulo a b))))\n\n; Sample Input-Output Pairs\n; (gcd 48 18) => 6\n; (gcd 100 25) => 25\n; (gcd 7 3) => 1",
+    "(define (gcd a b)\n  (if (zero? b)\n      a\n      (gcd b (remainder a b))))\n\n; Sample Input-Output Pairs\n; (gcd 48 18) => 6\n; (gcd 100 25) => 25\n; (gcd 7 5) => 1",
+    "(define (gcd a b)\n  (if (= b 0)\n      a\n      (gcd b (remainder a b))))\n\n; Sample Input-Output Pairs\n; (gcd 48 18) => 6\n; (gcd 100 25) => 25\n; (gcd 7 5) => 1",
+    "(define (gcd a b)\n  (if (zero? b)\n      a\n      (gcd b (modulo a b))))\n\n; Example usage:\n; (gcd 48 18) => 6\n; (gcd 100 25) => 25"
+  ],
+  "test_cases": [
+    {
+      "input": "12 17",
+      "output": "1"
+    },
+    {
+      "input": "4 6",
+      "output": "2"
+    },
+    {
+      "input": "2 9",
+      "output": "1"
+    }
+  ]
+}

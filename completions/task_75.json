@@ -1,0 +1,28 @@
+{
+  "task_id": 75,
+  "description": "Given a list of tuples and an integer k, find all tuples where every element is divisible by k.",
+  "input_format": "The input consists of multiple lines. The first line contains an integer n denoting the number of tuples. This is followed by n lines, each containing space-separated integers representing the elements of a tuple. The last line contains the integer k.",
+  "output_format": "The output is a single line containing the filtered list of tuples in the format [(a, b, c), ...], where each tuple's elements are separated by commas and spaces.",
+  "prompt": "; Given a list of tuples and an integer k, find all tuples where every element is divisible by k.\n; Input format: The input consists of multiple lines. The first line contains an integer n denoting the number of tuples. This is followed by n lines, each containing space-separated integers representing the elements of a tuple. The last line contains the integer k.\n; Output format: The output is a single line containing the filtered list of tuples in the format [(a, b, c), ...], where each tuple's elements are separated by commas and spaces.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (filter-divisible-by-k tuples k)\n  (map (lambda (tuple)\n         (filter (lambda (x) (zero? (modulo x k))) tuple))\n       tuples))\n\n;; Example usage:\n;; (filter-divisible-by-k '((1 2 3) (4 5 6) (7 8 9)) 3)\n;; Expected output: '((3) (6) (9))",
+    "(define (filter-divisible-by-k tuples k)\n  (map (lambda (tuple)\n         (filter (lambda (x) (zero? (modulo x k)))\n                 tuple))\n       tuples))\n\n; Example usage:\n; (filter-divisible-by-k '((1 2 3) (4 5 6) (7 8 9)) 2)\n; => '((2 4 6) (8 10 12))",
+    "(define (filter-divisible-tuples tuples k)\n  (map (lambda (tuple)\n         (filter (lambda (x) (zero? (modulo x k)))\n                 tuple))\n       tuples))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([tuple (read)])\n        (displayln (filter-divisible-tuples (list tuple) (read)))))))\n\n(main)",
+    "(define (filter-divisible-tuples tuples k)\n  (map (lambda (tuple)\n         (filter (lambda (x) (zero? (modulo x k)))\n                 tuple))\n       tuples))\n\n; Example usage:\n; (filter-divisible-tuples '((1 2 3) (4 5 6) (7 8 9)) 2)\n; => '((2 4 6) (4 6 8))",
+    "(define (filter-divisible-tuples tuples k)\n  (map (lambda (tuple)\n         (filter (lambda (x) (zero? (modulo x k)))\n                 tuple))\n       tuples))\n\n; Example usage:\n; (filter-divisible-tuples '((1 2 3) (4 5 6) (7 8 9)) 2)\n; => '((2 4 6) (4 6 8))"
+  ],
+  "test_cases": [
+    {
+      "input": "3\n6 24 12\n7 9 6\n12 18 21\n6",
+      "output": "[(6, 24, 12)]"
+    },
+    {
+      "input": "3\n5 25 30\n4 2 3\n7 8 9\n5",
+      "output": "[(5, 25, 30)]"
+    },
+    {
+      "input": "3\n7 9 16\n8 16 4\n19 17 18\n4",
+      "output": "[(8, 16, 4)]"
+    }
+  ]
+}

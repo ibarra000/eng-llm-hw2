@@ -1,0 +1,28 @@
+{
+  "task_id": 322,
+  "description": "Find all index positions of the minimum values in a given list.",
+  "input_format": "A single line containing space-separated integers representing the list.",
+  "output_format": "A single line containing space-separated integers representing the indices of the minimum values in the order they appear.",
+  "prompt": "; Find all index positions of the minimum values in a given list.\n; Input format: A single line containing space-separated integers representing the list.\n; Output format: A single line containing space-separated integers representing the indices of the minimum values in the order they appear.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (find-min-indices lst)\n  (let loop ((lst lst) (min-val (car lst)) (min-indices (list (car lst))))\n    (if (null? lst)\n        (reverse min-indices)\n        (let ((current (car lst)))\n          (if (<= current min-val)\n              (loop (cdr lst) current (cons (car lst) min-indices))\n              (loop (cdr lst) min-val min-indices))))))\n\n(define (main)\n  (let ((lst (read-line)))\n    (displayln (find-min-indices (map string->number (string-split lst #\\ ))))))\n\n(main)",
+    "(define (find-min-indices lst)\n  (let loop ((lst lst) (min-val (car lst)) (min-indices (list (car lst))))\n    (cond\n      ((null? lst) (reverse min-indices))\n      ((< (car lst) min-val) (loop (cdr lst) (car lst) (cons (car lst) min-indices)))\n      (else (loop (cdr lst) min-val min-indices)))))\n\n(define (main)\n  (let ((input (read-line)))\n    (let ((lst (map string->number (string-split input))))\n      (displayln (apply string-append (map (lambda (x) (number->string x)) (find-min-indices lst))))))\n\n(main)",
+    "(define (find-min-indices lst)\n  (define min-index 0)\n  (define min-value (car lst))\n  (define result '())\n  (for ([i (in-range (length lst))])\n    (if (<= (list-ref lst i) min-value)\n        (begin\n          (set! min-value (list-ref lst i))\n          (set! min-index i)\n          (set! result (cons min-index result))))\n    (set! min-value (car lst)))\n  (set! result (reverse result))\n  result)\n\n(module+ test\n  (check-equal? (find-min-indices '(1 2 3 4 5 6 7 8 9 10)) '(0 1 2 3 4 5 6 7 8 9))\n  (check-equal? (find-min-indices '(10 9 8 7 6 5 4 3 2 1)) '(9 8 7 6 5 4 3 2 1 0))\n  (check-equal? (find-min-indices '(1 1 1 1 1 1 1 1 1 1)) '(0 1 2 3 4 5 6 7 8 9))\n  (check-equal? (find-min-indices '(1 2 3 4 5 6 7 8 9 10)) '(0 1 2 3 4 5 6 7 8 9))\n  (check-equal? (find-min-indices '(10 9 8 7 6 5 4 3 2 1)) '(9 8 7 6 5 4 3 2 1 0))\n  (check-equal? (find-min-indices '(1 1 1 1 1 1 1 1 1 1)) '(0 1 2 3 4 5 6 7 8 9))\n  (check-equal? (find-min-indices '(1 2 3 4 5 6 7 8 9 10)) '(0 1 2 3 4 5 6 7 8 9))\n  (check-equal? (find-min-indices '(10 9 ",
+    "(define (find-min-indices lst)\n  (let loop ((lst lst) (min-val (car lst)) (min-indices (list (car lst))))\n    (cond\n      ((null? lst) (reverse min-indices))\n      ((= (car lst) min-val) (loop (cdr lst) min-val (cons (car lst) min-indices)))\n      (else (loop (cdr lst) min-val min-indices)))))\n\n(define (main)\n  (let ((lst (read-line)))\n    (displayln (string-join (find-min-indices (map string->number (string-split lst))))))\n  \n  (main))",
+    "(define (find-min-indices lst)\n  (define min-index 0)\n  (define min-value (car lst))\n  (define result '())\n  \n  (for ([i (in-range (length lst))])\n    (if (<= (list-ref lst i) min-value)\n        (begin\n          (set! min-value (list-ref lst i))\n          (set! min-index i)\n          (set! result (cons min-index result))))\n    (set! result (cons min-index result)))\n  \n  (reverse result))\n\n(module+ test\n  (require rackunit)\n  (check-equal? (find-min-indices '(3 1 4 1 5 9 2 6)) '(0 3 5))\n  (check-equal? (find-min-indices '(10 20 30 40 50)) '(0))\n  (check-equal? (find-min-indices '(1 1 1 1)) '(0 1 2 3)))"
+  ],
+  "test_cases": [
+    {
+      "input": "12 33 23 10 67 89 45 667 23 12 11 10 54",
+      "output": "3 11"
+    },
+    {
+      "input": "1 2 2 2 4 4 4 5 5 5 5",
+      "output": "0"
+    },
+    {
+      "input": "2 1 5 6 8 3 4 9 10 11 8 12",
+      "output": "1"
+    }
+  ]
+}

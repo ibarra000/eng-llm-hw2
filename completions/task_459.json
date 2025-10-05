@@ -1,0 +1,28 @@
+{
+  "task_id": 459,
+  "description": "Write a function to remove uppercase substrings from a given string by using regex.",
+  "input_format": "A single line containing the input string.",
+  "output_format": "A single line containing the resulting string after removing all uppercase substrings.",
+  "prompt": "; Write a function to remove uppercase substrings from a given string by using regex.\n; Input format: A single line containing the input string.\n; Output format: A single line containing the resulting string after removing all uppercase substrings.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (remove-uppercase-substrings str)\n  (regexp-replace #rx\"[A-Z]+\" str \"\"))\n\n(remove-uppercase-substrings \"Hello World! This is a Test.\")",
+    "(require racket/regexp)\n\n(define (remove-uppercase-substrings input-string)\n  (regexp-replace input-string #px\"[A-Z]+\" \"\"))\n\n(define input-string (read-line))\n(displayln (remove-uppercase-substrings input-string))",
+    "(define (remove-upper-strings input-string)\n  (regexp-replace #rx\"[A-Z]+\" input-string \"\"))\n\n(remove-upper-strings \"Hello World!\") ; Output: \"ello orld!\"",
+    "(define (remove-uppercase-substrings str)\n  (regexp-replace #rx\"[A-Z]+\" \"\" str))\n\n(remove-uppercase-substrings \"Hello World!\")",
+    "(define (remove-uppercase-substrings input-string)\n  (regexp-replace #rx\"[A-Z]+\" input-string \"\"))\n\n;; Sample Input-Output Pairs\n;; (remove-uppercase-substrings \"Hello World\") => \"ello orld\"\n;; (remove-uppercase-substrings \"Racket Programming\") => \"acket rogramming\"\n;; (remove-uppercase-substrings \"123 ABC abc\") => \"123 ABC abc\""
+  ],
+  "test_cases": [
+    {
+      "input": "cAstyoUrFavoRitETVshoWs",
+      "output": "cstyoravoitshos"
+    },
+    {
+      "input": "wAtchTheinTernEtrAdIo",
+      "output": "wtchheinerntrdo"
+    },
+    {
+      "input": "VoicESeaRchAndreComMendaTionS",
+      "output": "oiceachndreomendaion"
+    }
+  ]
+}

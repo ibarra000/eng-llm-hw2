@@ -1,0 +1,28 @@
+{
+  "task_id": 102,
+  "description": "Write a function to convert a snake case string to a camel case string.",
+  "input_format": "The input is a single line containing the snake case string.",
+  "output_format": "The output is a single line containing the camel case string.",
+  "prompt": "; Write a function to convert a snake case string to a camel case string.\n; Input format: The input is a single line containing the snake case string.\n; Output format: The output is a single line containing the camel case string.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (snake-to-camel snake)\n  (let loop ([snake snake] [acc '()])\n    (cond\n      [(empty? snake) (reverse acc)]\n      [(char=? (first snake) #\\_) (loop (rest snake) (cons (first snake) acc))]\n      [else (loop (rest snake) (cons (first snake) acc))])))\n\n;; Sample Input-Output Pairs\n;; (snake-to-camel \"hello_world\") => \"helloWorld\"\n;; (snake-to-camel \"this_is_a_test\") => \"thisIsATest\"\n;; (snake-to-camel \"snake_case_to_camel_case\") => \"snakeCaseToCamelCase\"",
+    "(define (snake-to-camel snake)\n  (let loop ([s snake] [acc '()])\n    (cond\n      [(empty? s) (reverse acc)]\n      [(char=? (first s) #\\_) (loop (rest s) (cons (first s) acc))]\n      [else (loop (rest s) (cons (string->symbol (string-append (symbol->string (first s)) (first (rest s)))) acc))])))\n\n; Sample input-output pairs\n; (snake-to-camel \"hello_world\") => \"helloWorld\"\n; (snake-to-camel \"convert_this_string\") => \"convertThisString\"",
+    "(define (snake-to-camel snake-case-string)\n  (let ([words (string-split snake-case-string \"-\")])\n    (string-join (map (lambda (word)\n                        (string-upcase (string-take word 1))\n                        (string-downcase (string-take (string-take-right word 1) (string-length word) -1))))\n                 \"\")))\n\n;; Sample Input-Output Pairs\n;; (snake-to-camel \"hello-world\") => \"HelloWorld\"\n;; (snake-to-camel \"this-is-a-test\") => \"ThisIsATest\"",
+    "(define (snake-to-camel snake)\n  (let loop ([snake snake] [acc '()])\n    (if (empty? snake)\n        (string->symbol (string-join acc #\\))\n        (let ([first (first snake)])\n          (if (char-alphabetic? first)\n              (loop (rest snake) (cons (string->symbol (string first)) acc))\n              (loop (rest snake) (cons (string first) acc)))))))\n\n;; Sample Input-Output Pairs\n;; (snake-to-camel \"hello_world\") => \"helloWorld\"\n;; (snake-to-camel \"this_is_a_test\") => \"thisIsATest\"",
+    "(define (snake-to-camel snake-case-string)\n  (let ([words (string-split snake-case-string \"-\")])\n    (map (lambda (word)\n           (string->symbol (string-upcase (string-take word 1))\n                           (string-downcase (string-take (string-take-right word 1) (string-length word)))))\n         words)))\n\n; Sample input-output pairs\n; (snake-to-camel \"hello-world\") => \"HelloWorld\"\n; (snake-to-camel \"this-is-a-test\") => \"ThisIsATest\""
+  ],
+  "test_cases": [
+    {
+      "input": "python_program",
+      "output": "PythonProgram"
+    },
+    {
+      "input": "python_language",
+      "output": "PythonLanguage"
+    },
+    {
+      "input": "programming_language",
+      "output": "ProgrammingLanguage"
+    }
+  ]
+}

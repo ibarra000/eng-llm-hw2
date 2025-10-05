@@ -1,0 +1,28 @@
+{
+  "task_id": 197,
+  "description": "Perform element-wise exponentiation of two tuples. Each element in the first tuple is raised to the power of the corresponding element in the second tuple.",
+  "input_format": "Two lines containing space-separated integers. The first line represents the first tuple, the second line represents the second tuple.",
+  "output_format": "A single line containing space-separated integers representing the resulting tuple after exponentiation.",
+  "prompt": "; Perform element-wise exponentiation of two tuples. Each element in the first tuple is raised to the power of the corresponding element in the second tuple.\n; Input format: Two lines containing space-separated integers. The first line represents the first tuple, the second line represents the second tuple.\n; Output format: A single line containing space-separated integers representing the resulting tuple after exponentiation.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (element-wise-exponentiation tuple1 tuple2)\n  (map (lambda (x y) (expt x y)) tuple1 tuple2))\n\n;; Example usage:\n;; (element-wise-exponentiation (list 2 3) (list 4 5))\n;; Expected output: (16 243)",
+    "(define (element-wise-exponentiation tuple1 tuple2)\n  (map (lambda (x y) (expt x y)) tuple1 tuple2))\n\n(define (main)\n  (let ([tuple1 (read)]\n        [tuple2 (read)])\n    (displayln (element-wise-exponentiation tuple1 tuple2))))\n\n(main)",
+    "(define (tuple-exponentiation tuple1 tuple2)\n  (map (lambda (x y) (expt x y)) tuple1 tuple2))\n\n; Example usage:\n; (tuple-exponentiation '(2 3 4) '(5 6 7))\n; Expected output: (32 729 16384)",
+    "(define (element-wise-exponentiation tuple1 tuple2)\n  (map (lambda (x y) (expt x y)) tuple1 tuple2))\n\n(define tuple1 (read))\n(define tuple2 (read))\n(displayln (element-wise-exponentiation tuple1 tuple2))\n\n; Sample Input-Output Pairs:\n; Input:\n; 2 3\n; 4 5\n; Output:\n; 8 243",
+    "(define (element-wise-exponentiation tuple1 tuple2)\n  (map (lambda (x y) (expt x y)) tuple1 tuple2))\n\n; Example usage:\n; (element-wise-exponentiation (list 2 3 4) (list 5 6 7))\n; Output: (32 729 16384)"
+  ],
+  "test_cases": [
+    {
+      "input": "10 4 5 6\n5 6 7 5",
+      "output": "100000 4096 78125 7776"
+    },
+    {
+      "input": "11 5 6 7\n6 7 8 6",
+      "output": "1771561 78125 1679616 117649"
+    },
+    {
+      "input": "12 6 7 8\n7 8 9 7",
+      "output": "35831808 1679616 40353607 2097152"
+    }
+  ]
+}

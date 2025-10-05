@@ -1,0 +1,28 @@
+{
+  "task_id": 352,
+  "description": "Check whether all the characters in a given string are unique.",
+  "input_format": "A single line containing the input string.",
+  "output_format": "A single line containing 'True' or 'False'.",
+  "prompt": "; Check whether all the characters in a given string are unique.\n; Input format: A single line containing the input string.\n; Output format: A single line containing 'True' or 'False'.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (is-unique? str)\n  (define (helper str)\n    (cond\n      [(empty? str) #t]\n      [(char=? (first str) (second str)) #f]\n      [else (helper (rest str))]))\n  (helper str))\n\n(is-unique? \"abcde\") ; True\n(is-unique? \"aabbcc\") ; False",
+    "(define (is-unique? str)\n  (define (unique? str)\n    (define (helper str)\n      (cond [(empty? str) #t]\n            [(member (first str) (rest str)) #f]\n            [else (helper (rest str))]))\n    (helper str))\n  (unique? str))\n\n(is-unique? \"abc\") ; => #t\n(is-unique? \"abca\") ; => #f",
+    "(define (is-all-unique? str)\n  (define (helper str)\n    (cond\n      [(empty? str) #t]\n      [(= (string-length str) 1) #t]\n      [(char=? (first str) (second str)) #f]\n      [else (helper (rest str))]))\n  (helper str))\n\n(is-all-unique? \"abcdef\") ; => #t\n(is-all-unique? \"abcdeff\") ; => #f",
+    "(define (is-unique? str)\n  (define (unique? char)\n    (let loop ((chars (string->list str))\n               (seen (make-hash)))\n      (if (null? chars)\n          #t\n          (let ((char (car chars)))\n            (hash-set! seen char #t)\n            (if (hash-ref seen char #f)\n                #f\n                (loop (cdr chars) seen))))))\n\n(is-unique? \"abcdefg\") ; => #t\n(is-unique? \"aabbcc\")  ; => #f",
+    "(define (is-unique? str)\n  (let loop ([str str] [seen '()])\n    (if (null? str)\n        (if (equal? seen '())\n            #t\n            #f)\n        (let ([char (string-ref str 0)])\n          (if (member char seen)\n              #f\n              (loop (substring str 1) (cons char seen)))))))\n\n(define (main)\n  (let ([input (read-line)])\n    (displayln (if (is-unique? input) \"True\" \"False\"))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "aba",
+      "output": "False"
+    },
+    {
+      "input": "abc",
+      "output": "True"
+    },
+    {
+      "input": "abab",
+      "output": "False"
+    }
+  ]
+}

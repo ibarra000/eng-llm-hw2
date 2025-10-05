@@ -1,0 +1,28 @@
+{
+  "task_id": 265,
+  "description": "Split a list into n sublists, where each sublist contains every nth element starting from the corresponding position. For example, given a list and an integer n, the first sublist contains elements at indices 0, 0+n, 0+2n, etc., the second sublist starts at index 1, and so on until the nth sublist.",
+  "input_format": "The first line contains the elements of the list separated by spaces. The second line contains a single integer n.",
+  "output_format": "n lines, each containing the elements of a sublist separated by spaces. The sublists are ordered from the first to the nth.",
+  "prompt": "; Split a list into n sublists, where each sublist contains every nth element starting from the corresponding position. For example, given a list and an integer n, the first sublist contains elements at indices 0, 0+n, 0+2n, etc., the second sublist starts at index 1, and so on until the nth sublist.\n; Input format: The first line contains the elements of the list separated by spaces. The second line contains a single integer n.\n; Output format: n lines, each containing the elements of a sublist separated by spaces. The sublists are ordered from the first to the nth.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (split-list lst n)\n  (define (helper lst n result)\n    (if (null? lst)\n        result\n        (helper (cdr lst) n (cons (car lst) result))))\n  (define (sublists lst n)\n    (if (<= n 0)\n        '()\n        (cons (helper lst n '()) (sublists lst (- n 1)))))\n  (sublists lst n))\n\n; Example usage:\n; (split-list '(1 2 3 4 5 6 7 8 9) 3)\n; Output:\n; (1 4 7)\n; (2 5 8)\n; (3 6 9)",
+    "(define (split-list lst n)\n  (define (helper lst n result)\n    (if (null? lst)\n        result\n        (helper (cdr lst) n (cons (car lst) result))))\n  (define (sublists lst n)\n    (if (zero? n)\n        (list lst)\n        (append (sublists (cdr lst) (- n 1)) (list (helper (cdr lst) n '())))))\n  (sublists lst n))\n\n(define (main)\n  (let ([lst (map string->number (string-split (read-line) \" \"))]\n        [n (read-line)])\n    (for ([i (in-range (string->number n))])\n      (displayln (string-join (split-list lst (+ i 1)) \" \"))))\n\n(main)",
+    "(define (split-list lst n)\n  (define (helper lst n result)\n    (if (null? lst)\n        result\n        (helper (cdr lst) n (cons (car lst) result))))\n  (define (sublists lst n)\n    (if (= n 0)\n        '()\n        (let ([sublist (helper lst n '())])\n          (cons sublist (sublists lst (- n 1))))))\n  (sublists lst n))\n\n(define (main)\n  (define lst (read-line))\n  (define n (read))\n  (displayln (apply string-append (map (lambda (x) (string-append (number->string x) \" \")) (split-list (string->list lst) n)))))\n\n(main)",
+    "(define (split-list lst n)\n  (define (helper lst n result)\n    (if (null? lst)\n        result\n        (helper (cdr lst) n (cons (car lst) result))))\n  (define (sublists lst n)\n    (if (zero? n)\n        (list lst)\n        (let ([sublist (helper lst n '())])\n          (append (sublists (cdr lst) (- n 1)) (list sublist)))))\n  (sublists lst n))\n\n; Example usage:\n; (split-list '(1 2 3 4 5 6 7 8 9) 3)\n; Output: ((1 4 7) (2 5 8) (3 6 9))",
+    "(define (split-list lst n)\n  (define (helper lst n acc)\n    (if (null? lst)\n        (reverse acc)\n        (helper (cdr lst) n (cons (car lst) acc))))\n  (helper lst n '()))\n\n(define (main)\n  (let ([lst (map string->symbol (read-line))]\n        [n (read)])\n    (for ([i (in-range n)])\n      (displayln (string-join (split-list lst i) \" \"))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "a b c d e f g h i j k l m n\n3",
+      "output": "a d g j m\nb e h k n\nc f i l"
+    },
+    {
+      "input": "1 2 3 4 5 6 7 8 9 10 11 12 13 14\n3",
+      "output": "1 4 7 10 13\n2 5 8 11 14\n3 6 9 12"
+    },
+    {
+      "input": "python java C C++ DBMS SQL\n2",
+      "output": "python C DBMS\njava C++ SQL"
+    }
+  ]
+}

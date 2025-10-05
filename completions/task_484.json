@@ -1,0 +1,28 @@
+{
+  "task_id": 484,
+  "description": "Given two lists of tuples, remove all tuples from the first list that are present in the second list and return the resulting list.",
+  "input_format": "Two lines. The first line is the first list of tuples, and the second line is the second list. Each list is represented as a Python list of tuples, with tuples in parentheses and elements separated by commas. Tuples in the list are separated by commas and a space.",
+  "output_format": "A single line containing the resulting list of tuples in the same format as the input.",
+  "prompt": "; Given two lists of tuples, remove all tuples from the first list that are present in the second list and return the resulting list.\n; Input format: Two lines. The first line is the first list of tuples, and the second line is the second list. Each list is represented as a Python list of tuples, with tuples in parentheses and elements separated by commas. Tuples in the list are separated by commas and a space.\n; Output format: A single line containing the resulting list of tuples in the same format as the input.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (remove-tuples lst1 lst2)\n  (map (lambda (x) (if (member x lst2) #f x)) lst1))\n\n(define (main)\n  (let ([lst1 (read)]\n        [lst2 (read)])\n    (displayln (remove-tuples lst1 lst2))))\n\n(main)",
+    "(define (remove-tuples lst1 lst2)\n  (filter (lambda (x) (not (member x lst2))) lst1))\n\n(define (main)\n  (let ([lst1 (read)]\n        [lst2 (read)])\n    (displayln (remove-tuples lst1 lst2))))\n\n(main)",
+    "(define (remove-tuples lst1 lst2)\n  (filter (lambda (x) (not (member x lst2))) lst1))\n\n(define (main)\n  (let ([lst1 (read)]\n        [lst2 (read)])\n    (displayln (remove-tuples lst1 lst2))))\n\n(main)",
+    "(define (remove-tuples lst1 lst2)\n  (map (lambda (x) (if (member x lst2) #f x)) lst1))\n\n(define (main)\n  (let ([lst1 (read)]\n        [lst2 (read)])\n    (displayln (remove-tuples lst1 lst2))))\n\n(main)",
+    "(define (remove-tuples lst1 lst2)\n  (filter (lambda (x) (not (member x lst2))) lst1))\n\n(define (main)\n  (let ([lst1 (read)]\n        [lst2 (read)])\n    (displayln (remove-tuples lst1 lst2))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "[('Hello', 'dude'), ('How', 'are'), ('you', '?')]\n[('Hello', 'dude'), ('How', 'are')]",
+      "output": "[('you', '?')]"
+    },
+    {
+      "input": "[('Part', 'of'), ('the', 'journey'), ('is ', 'end')]\n[('Journey', 'the'), ('is', 'end')]",
+      "output": "[('Part', 'of'), ('the', 'journey'), ('is ', 'end')]"
+    },
+    {
+      "input": "[('Its', 'been'), ('a', 'long'), ('day', 'without')]\n[('a', 'long'), ('my', 'friend')]",
+      "output": "[('Its', 'been'), ('day', 'without')]"
+    }
+  ]
+}

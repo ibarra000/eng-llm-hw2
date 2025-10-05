@@ -1,0 +1,28 @@
+{
+  "task_id": 393,
+  "description": "Given a list of lists, write a function to find the list with the maximum length using a lambda function. Return a tuple containing the length of the longest list and the list itself.",
+  "input_format": "The first line contains an integer N, the number of lists. This is followed by N lines, each containing space-separated integers representing a list.",
+  "output_format": "The output is the length of the longest list followed by the elements of the longest list, all separated by spaces.",
+  "prompt": "; Given a list of lists, write a function to find the list with the maximum length using a lambda function. Return a tuple containing the length of the longest list and the list itself.\n; Input format: The first line contains an integer N, the number of lists. This is followed by N lines, each containing space-separated integers representing a list.\n; Output format: The output is the length of the longest list followed by the elements of the longest list, all separated by spaces.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (find-longest-list lst)\n  (let ((max-len 0)\n        (max-list '()))\n    (for ([l lst])\n      (let ((len (length l)))\n        (if (> len max-len)\n            (begin\n              (set! max-len len)\n              (set! max-list l)))))\n    (values max-len max-list)))\n\n(define (main)\n  (let ([input (read)])\n    (let ([lst (map (lambda (x) (map (lambda (y) (string->number y)) (string-split (string x) #\\space))) (string-split (read-line) #\\newline))])\n      (let ([result (find-longest-list lst)])\n        (displayln (format \"Length: ~a, List: ~a\" (car result) (cdr result)))))))\n\n(main)",
+    "(define (find-longest-list lst)\n  (let ((max-len 0)\n        (max-list '()))\n    (for ([l lst])\n      (let ((len (length l)))\n        (if (> len max-len)\n            (begin\n              (set! max-len len)\n              (set! max-list l)))))\n    (values max-len max-list)))\n\n(define (main)\n  (let ([n (read)])\n    (let ([lst (for/list ([i n]) (read))])\n      (let ([result (find-longest-list lst)])\n        (displayln (list (car result) (map (lambda (x) (string->number (number->string x))) (cdr result))))))))\n\n(main)",
+    "(define (find-longest-list lst)\n  (let ((max-len 0)\n        (longest-list '()))\n    (for ([l lst])\n      (let ((len (length l)))\n        (if (> len max-len)\n            (begin\n              (set! max-len len)\n              (set! longest-list l)))))\n    (values max-len longest-list)))\n\n(define (main)\n  (let ([input (read)])\n    (let ([lst (map (lambda (x) (map (lambda (y) (string->number y)) (string-split (string x) #\\space))) input)])\n      (let ([result (find-longest-list lst)])\n        (displayln (format \"Length: ~a, List: ~a\" (car result) (cdr result)))))))\n\n(main)",
+    "(define (find-max-length-list lst)\n  (let loop ((lst lst) (max-len 0) (max-list '()))\n    (if (null? lst)\n        (values max-len max-list)\n        (let ((current-len (length (car lst))))\n          (if (> current-len max-len)\n              (loop (cdr lst) current-len (car lst))\n              (loop (cdr lst) max-len max-list))))))\n\n(define (main)\n  (let* ((n (read))\n         (lists (for/list ((i n)) (read))))\n    (let-values ([(max-len max-list) (find-max-length-list lists)])\n      (displayln max-len)\n      (displayln (apply string-append (map (lambda (x) (string-append (number->string x) \" \")) max-list)))))\n\n(main)",
+    "(define (find-longest-list lst)\n  (let loop ((lst lst) (max-len 0) (max-list '()))\n    (if (null? lst)\n        (values max-len max-list)\n        (let ((current-len (length (car lst))))\n          (if (> current-len max-len)\n              (loop (cdr lst) current-len (car lst))\n              (loop (cdr lst) max-len max-list))))))\n\n(define (main)\n  (let* ((n (read))\n         (lists (for/list ((i n)) (read))))\n    (let-values ([(max-len max-list) (find-longest-list lists)])\n      (displayln max-len)\n      (displayln (apply string-append (map (lambda (x) (string-append (number->string x) \" \")) max-list))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "5\n0\n1 3\n5 7\n9 11\n13 15 17",
+      "output": "3 13 15 17"
+    },
+    {
+      "input": "5\n1 2 3 4 5\n1 2 3 4\n1 2 3\n1 2\n1",
+      "output": "5 1 2 3 4 5"
+    },
+    {
+      "input": "3\n3 4 5\n6 7 8 9\n10 11 12",
+      "output": "4 6 7 8 9"
+    }
+  ]
+}

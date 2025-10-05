@@ -1,0 +1,28 @@
+{
+  "task_id": 445,
+  "description": "Write a function to perform index-wise multiplication of tuple elements in the given two tuples.",
+  "input_format": "The first line contains an integer N, representing the number of tuples in each input. The next N lines contain two integers each, representing the elements of the first tuple's i-th pair. The following N lines contain two integers each, representing the elements of the second tuple's i-th pair.",
+  "output_format": "N lines, each containing two integers separated by a space, representing the index-wise multiplied tuples.",
+  "prompt": "; Write a function to perform index-wise multiplication of tuple elements in the given two tuples.\n; Input format: The first line contains an integer N, representing the number of tuples in each input. The next N lines contain two integers each, representing the elements of the first tuple's i-th pair. The following N lines contain two integers each, representing the elements of the second tuple's i-th pair.\n; Output format: N lines, each containing two integers separated by a space, representing the index-wise multiplied tuples.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (index-wise-mult t1 t2)\n  (for/list ([i (in-range (length t1))])\n    (list (list-ref t1 i) (list-ref t2 i))))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([t1 (read)]\n            [t2 (read)])\n        (displayln (index-wise-mult t1 t2)))))\n\n(main)",
+    "(define (multiply-tuples t1 t2)\n  (map (lambda (x y) (* x y)) t1 t2))\n\n(define (main)\n  (let ([n (read)])\n    (let ([t1 (for/list ([i n]) (read))])\n      (let ([t2 (for/list ([i n]) (read))])\n        (for ([i (in-range n)])\n          (displayln (multiply-tuples t1 t2))))))\n  \n(main)",
+    "(define (index-wise-mult t1 t2)\n  (for/list ([i (in-range (length t1))])\n    (list (list-ref t1 i) (list-ref t2 i))))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([t1 (read)]\n            [t2 (read)])\n        (displayln (index-wise-mult t1 t2)))))\n\n(main)",
+    "(define (multiply-tuples t1 t2)\n  (map (lambda (x y) (* x y)) t1 t2))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)]\n          [t1 (in-list (map (lambda (x) (map (lambda (y) (read)) (list x (list (read) (read)))) (list (read) (read)))))]\n          [t2 (in-list (map (lambda (x) (map (lambda (y) (read)) (list x (list (read) (read)))) (list (read) (read)))))]\n          [result (in-list (map (lambda (x y) (list x y)) (multiply-tuples t1 t2)))]\n          [output (in-list (map (lambda (x y) (list x y)) (list (read) (read))))])\n      (displayln (string-append (number->string (car result)) \" \" (number->string (cadr result))))))\n  \n(main)",
+    "(define (multiply-tuples t1 t2)\n  (for/list ([i (in-range (length t1))])\n    (list (apply * (map (lambda (x y) (* x y)) (list-ref t1 i) (list-ref t2 i)))))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([t1 (read)]\n            [t2 (read)])\n        (displayln (apply add (multiply-tuples t1 t2)))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "4\n1 3\n4 5\n2 9\n1 10\n6 7\n3 9\n1 1\n7 3",
+      "output": "6 21\n12 45\n2 9\n7 30"
+    },
+    {
+      "input": "4\n2 4\n5 6\n3 10\n2 11\n7 8\n4 10\n2 2\n8 4",
+      "output": "14 32\n20 60\n6 20\n16 44"
+    },
+    {
+      "input": "4\n3 5\n6 7\n4 11\n3 12\n8 9\n5 11\n3 3\n9 5",
+      "output": "24 45\n30 77\n12 33\n27 60"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "task_id": 268,
+  "description": "Find the n'th star number using the formula 6*n*(n-1) + 1.",
+  "input_format": "A single integer n.",
+  "output_format": "A single integer representing the n'th star number.",
+  "prompt": "; Find the n'th star number using the formula 6*n*(n-1) + 1.\n; Input format: A single integer n.\n; Output format: A single integer representing the n'th star number.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (star-number n)\n  (+ (* 6 n (- n 1)) 1))\n\n; Example usage:\n; (star-number 1) => 1\n; (star-number 2) => 13\n; (star-number 3) => 37\n; (star-number 4) => 73\n; (star-number 5) => 121",
+    "(define (star-number n)\n  (+ (* 6 (* n (- n 1))) 1))\n\n; Example usage:\n; (star-number 1) => 1\n; (star-number 2) => 13\n; (star-number 3) => 37\n; (star-number 4) => 73\n; (star-number 5) => 121",
+    "(define (star-number n)\n  (+ (* 6 (* n (- n 1))) 1))\n\n; Example usage:\n; (star-number 1) => 1\n; (star-number 2) => 13\n; (star-number 3) => 37\n; (star-number 4) => 73\n; (star-number 5) => 121",
+    "(define (star-number n)\n  (+ (* 6 n (- n 1)) 1))\n\n; Example usage:\n; (star-number 5) => 121\n; (star-number 10) => 576",
+    "(define (star-number n)\n  (let ((n (sub1 n)))\n    (* 6 n n) 1))\n\n; Example usage:\n; (star-number 1) => 1\n; (star-number 2) => 13\n; (star-number 3) => 37\n; (star-number 4) => 73\n; (star-number 5) => 121"
+  ],
+  "test_cases": [
+    {
+      "input": "3",
+      "output": "37"
+    },
+    {
+      "input": "4",
+      "output": "73"
+    },
+    {
+      "input": "5",
+      "output": "121"
+    }
+  ]
+}

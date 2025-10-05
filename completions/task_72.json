@@ -1,0 +1,28 @@
+{
+  "task_id": 72,
+  "description": "Check whether the given number can be represented as difference of two squares or not.",
+  "input_format": "A single integer n.",
+  "output_format": "A boolean value (True or False) as a string.",
+  "prompt": "; Check whether the given number can be represented as difference of two squares or not.\n; Input format: A single integer n.\n; Output format: A boolean value (True or False) as a string.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (is-difference-of-squares? n)\n  (define (is-perfect-square? x)\n    (let ((sqrt (sqrt x)))\n      (= (* sqrt sqrt) x)))\n  (define (find-squares n)\n    (let loop ((i 1) (squares '()))\n      (if (>= i (sqrt n))\n          squares\n          (let ((square (+ (* i i) 1)))\n            (loop (+ i 1) (cons square squares))))))\n  (let ((squares (find-squares n)))\n    (if (null? squares)\n        #f\n        (let ((first (car squares))\n              (second (cadr squares)))\n          (if (and (is-perfect-square? (- n first))\n                   (is-perfect-square? (- n second)))\n              #t\n              #f)))))\n\n(is-difference-of-squares? 15) ; Output: #t\n(is-difference-of-squares? 16) ; Output: #f",
+    "(define (is-difference-of-squares? n)\n  (let loop ((i 1))\n    (cond ((> i n) #f)\n          ((= n (* (- i 1) (- i 1))) #t)\n          (else (loop (+ i 2))))))\n\n(define (main)\n  (displayln (is-difference-of-squares? 10))\n  (displayln (is-difference-of-squares? 100))\n  (displayln (is-difference-of-squares? 1000)))\n\n(main)",
+    "(define (is-difference-of-squares n)\n  (define (is-perfect-square x)\n    (sqrt x) = (round (sqrt x)))\n  (define (is-difference-of-squares? n)\n    (let loop ((i 1))\n      (cond ((< i n) (if (is-perfect-square (- n (* i i))) #t (loop (+ i 1)))))\n      (else #f)))\n  (is-difference-of-squares? n))\n\n(is-difference-of-squares 10) ; => #t\n(is-difference-of-squares 11) ; => #f",
+    "(define (is-difference-of-squares? n)\n  (define (is-perfect-square? x)\n    (let ((sqrt (sqrt x)))\n      (= (* sqrt sqrt) x)))\n  (let loop ((i 1))\n    (cond ((> i n) #f)\n          ((is-perfect-square? (- n (* i i)))\n           #t)\n          (else (loop (+ i 1))))))\n\n;; Sample Input-Output Pairs\n;; (is-difference-of-squares? 15) => #t\n;; (is-difference-of-squares? 10) => #f\n;; (is-difference-of-squares? 25) => #t\n;; (is-difference-of-squares? 30) => #f\n\n;; Test cases\n(check-equal? (is-difference-of-squares? 15) #t)\n(check-equal? (is-difference-of-squares? 10) #f)\n(check-equal? (is-difference-of-squares? 25) #t)\n(check-equal? (is-difference-of-squares? 30) #f)",
+    "(define (is-difference-of-squares? n)\n  (let loop ((i 1))\n    (cond ((= i n) #t)\n          ((= (- n (* i i)) 0) #t)\n          ((< (- n (* i i)) 0) #f)\n          (else (loop (+ i 1))))))\n\n(is-difference-of-squares? 15) ; => #t\n(is-difference-of-squares? 16) ; => #t\n(is-difference-of-squares? 17) ; => #f"
+  ],
+  "test_cases": [
+    {
+      "input": "5",
+      "output": "True"
+    },
+    {
+      "input": "10",
+      "output": "False"
+    },
+    {
+      "input": "15",
+      "output": "True"
+    }
+  ]
+}

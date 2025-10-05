@@ -1,0 +1,28 @@
+{
+  "task_id": 347,
+  "description": "Count the number of squares in a rectangle of size m x n. A rectangle contains squares of various sizes, and the task is to compute the total count.",
+  "input_format": "A single line containing two space-separated integers m and n, representing the dimensions of the rectangle.",
+  "output_format": "A single integer representing the total number of squares in the rectangle.",
+  "prompt": "; Count the number of squares in a rectangle of size m x n. A rectangle contains squares of various sizes, and the task is to compute the total count.\n; Input format: A single line containing two space-separated integers m and n, representing the dimensions of the rectangle.\n; Output format: A single integer representing the total number of squares in the rectangle.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (count-squares m n)\n  (define (count-squares-helper i j)\n    (if (or (= i 0) (= j 0))\n        0\n        (+ (count-squares-helper (- i 1) j)\n           (count-squares-helper i (- j 1))\n           (count-squares-helper (- i 1) (- j 1))\n           1)))\n  (count-squares-helper m n))\n\n;; Sample input-output pairs\n;; (count-squares 2 2) => 5\n;; (count-squares 3 3) => 14\n;; (count-squares 4 4) => 30\n\n;; Test cases\n(check-equal? (count-squares 2 2) 5)\n(check-equal? (count-squares 3 3) 14)\n(check-equal? (count-squares 4 4) 30)",
+    "(define (count-squares m n)\n  (let loop ((i m) (j n) (count 0))\n    (if (and (< i 1) (< j 1))\n        count\n        (loop (- i 1) (- j 1) (+ count (if (and (= i j) (= i 1)) 1 0))))))\n\n; Example usage:\n; (count-squares 3 2) ; Output: 4\n; (count-squares 4 4) ; Output: 30",
+    ";; Function to calculate the total number of squares in a rectangle of size m x n\n(define (count-squares m n)\n  (let loop ((i m) (j n) (count 0))\n    (if (and (< i 1) (< j 1))\n        count\n        (loop (- i 1) (- j 1) (+ count (if (<= i j) (* i j) 0))))))\n\n;; Example usage:\n;; (count-squares 3 2) => 8\n;; (count-squares 4 4) => 30\n\n;; Sample input-output pairs\n;; (count-squares 3 2) => 8\n;; (count-squares 4 4) => 30",
+    "(define (count-squares m n)\n  (let loop ((i m) (j n) (count 0))\n    (if (or (= i 0) (= j 0))\n        count\n        (loop (- i 1) j (+ count (min i j))))))\n\n;; Sample Input-Output Pairs\n;; (count-squares 3 2) => 8\n;; (count-squares 4 4) => 30\n;; (count-squares 1 1) => 1\n;; (count-squares 0 2) => 0\n;; (count-squares 2 0) => 0",
+    "(define (count-squares m n)\n  (let loop ((i m) (j n) (count 0))\n    (cond\n      [(= i 0) count]\n      [(= j 0) (loop (- i 1) n (+ count 1))]\n      [else (loop (- i 1) (- j 1) (+ count 1))])))\n\n; Example usage:\n; (count-squares 3 4) => 10\n; Explanation: There are 10 squares in a 3x4 rectangle: 1x1, 2x2, 3x3, 2x2, 1x1, 2x2, 3x3, 2x2, 1x1, 2x2."
+  ],
+  "test_cases": [
+    {
+      "input": "4 3",
+      "output": "20"
+    },
+    {
+      "input": "1 2",
+      "output": "2"
+    },
+    {
+      "input": "2 2",
+      "output": "5"
+    }
+  ]
+}

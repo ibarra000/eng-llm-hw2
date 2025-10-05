@@ -1,0 +1,28 @@
+{
+  "task_id": 51,
+  "description": "Check if a triangle is equilateral given the lengths of its sides.",
+  "input_format": "Three integers a, b, c separated by spaces.",
+  "output_format": "True or False",
+  "prompt": "; Check if a triangle is equilateral given the lengths of its sides.\n; Input format: Three integers a, b, c separated by spaces.\n; Output format: True or False\n\n#lang racket\n\n",
+  "completions": [
+    "(define (is-equilateral a b c)\n  (and (= a b) (= b c)))\n\n;; Sample Input-Output Pairs\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 4 5) => #f\n;; (is-equilateral 5 5 5) => #t\n;; (is-equilateral 2 2 3) => #f\n;; (is-equilateral 1 1 1) => #t\n\n;; Test cases\n(check-equal? (is-equilateral 3 3 3) #t)\n(check-equal? (is-equilateral 3 4 5) #f)\n(check-equal? (is-equilateral 5 5 5) #t)\n(check-equal? (is-equilateral 2 2 3) #f)\n(check-equal? (is-equilateral 1 1 1) #t)",
+    "(define (is-equilateral? a b c)\n  (and (equal? a b) (equal? b c)))\n\n;; Sample Input-Output Pairs\n;; (is-equilateral? 3 3 3) => #t\n;; (is-equilateral? 3 4 3) => #f\n;; (is-equilateral? 3 3 4) => #f\n;; (is-equilateral? 4 4 4) => #t\n;; (is-equilateral? 5 5 5) => #t\n;; (is-equilateral? 5 5 6) => #f\n;; (is-equilateral? 6 6 6) => #t\n;; (is-equilateral? 6 6 7) => #f\n;; (is-equilateral? 7 7 7) => #t\n;; (is-equilateral? 7 7 8) => #f\n;; (is-equilateral? 8 8 8) => #t\n;; (is-equilateral? 8 8 9) => #f\n;; (is-equilateral? 9 9 9) => #t\n;; (is-equilateral? 9 9 10) => #f\n;; (is-equilateral? 10 10 10) => #t\n;; (is-equilateral? 10 10 11) => #f\n;; (is-equilateral? 11 11 11) => #t\n;; (is-equilateral? 11 11 12) => #f\n;; (is-equilateral? 12 12 12) => #t\n;; (is-equilateral? 12 12 13) => #f\n;; (is-equilateral? 13 13 13) => #t\n;; (is-equilateral? 13 13 14) => #f\n;; (is-equilateral? 14 14 14) => #t\n;; (is-equilateral? 14 14 15) => #f\n;; (is-equilateral? 15 15 15) => #t\n;; (is-equilateral? 15 15 16) => #f\n",
+    "(define (is-equilateral? a b c)\n  (and (equal? a b) (equal? b c)))\n\n;; Sample Input-Output Pairs\n;; (is-equilateral? 3 3 3) => #t\n;; (is-equilateral? 3 4 5) => #f",
+    "(define (is-equilateral a b c)\n  (and (= a b) (= b c)))\n\n;; Sample Input-Output Pairs\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 4 3) => #f\n;; (is-equilateral 3 3 4) => #f\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equilateral 3 3 3) => #t\n;; (is-equ",
+    "(define (is-equilateral? a b c)\n  (and (equal? a b) (equal? b c)))\n\n(define (main)\n  (let ([a (read)] [b (read)] [c (read)])\n    (displayln (if (is-equilateral? a b c) \"True\" \"False\"))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "6 8 12",
+      "output": "False"
+    },
+    {
+      "input": "6 6 12",
+      "output": "False"
+    },
+    {
+      "input": "6 6 6",
+      "output": "True"
+    }
+  ]
+}

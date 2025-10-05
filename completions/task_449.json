@@ -1,0 +1,28 @@
+{
+  "task_id": 449,
+  "description": "Determine if three given points form a valid triangle. A valid triangle is formed if the points are not collinear.",
+  "input_format": "Six space-separated integers representing the coordinates of three points: x1 y1 x2 y2 x3 y3",
+  "output_format": "A single line containing either 'Yes' if the points form a valid triangle, or 'No' otherwise",
+  "prompt": "; Determine if three given points form a valid triangle. A valid triangle is formed if the points are not collinear.\n; Input format: Six space-separated integers representing the coordinates of three points: x1 y1 x2 y2 x3 y3\n; Output format: A single line containing either 'Yes' if the points form a valid triangle, or 'No' otherwise\n\n#lang racket\n\n",
+  "completions": [
+    "(define (is-valid-triangle x1 y1 x2 y2 x3 y3)\n  (let ((dx1 (- x2 x1))\n        (dy1 (- y2 y1))\n        (dx2 (- x3 x1))\n        (dy2 (- y3 y1)))\n    (not (= (* dx1 dy2) (* dx2 dy1)))))\n\n;; Sample Input-Output Pairs\n;; (is-valid-triangle 0 0 1 0 0 1) => \"Yes\"\n;; (is-valid-triangle 0 0 0 1 1 0) => \"No\"",
+    "(define (is-valid-triangle x1 y1 x2 y2 x3 y3)\n  (let ((dx1 (sub1 x1))\n        (dy1 (sub1 y1))\n        (dx2 (sub1 x2))\n        (dy2 (sub1 y2))\n        (dx3 (sub1 x3))\n        (dy3 (sub1 y3)))\n    (not (zero? (+ (* dx1 dy2) (* dy1 dx2) (* dx3 dy3) (* dy3 dx1) (* dy1 dx3) (* dx2 dy3))))))\n\n(define (main)\n  (let ([x1 (read)]\n        [y1 (read)]\n        [x2 (read)]\n        [y2 (read)]\n        [x3 (read)]\n        [y3 (read)])\n    (displayln (if (is-valid-triangle x1 y1 x2 y2 x3 y3) \"Yes\" \"No\"))))\n\n(main)",
+    "(define (is-valid-triangle x1 y1 x2 y2 x3 y3)\n  (let ((dx1 (- x2 x1))\n        (dy1 (- y2 y1))\n        (dx2 (- x3 x1))\n        (dy2 (- y3 y1)))\n    (not (zero? (+ (* dx1 dy2) (* dy1 dx2))))))\n  \n; Example usage:\n; (is-valid-triangle 0 0 1 0 0 1) ; => \"Yes\"\n; (is-valid-triangle 0 0 0 1 1 0) ; => \"No\"",
+    "(define (is-valid-triangle x1 y1 x2 y2 x3 y3)\n  (let ((dx1 (sub1 x1))\n        (dy1 (sub1 y1))\n        (dx2 (sub1 x2))\n        (dy2 (sub1 y2))\n        (dx3 (sub1 x3))\n        (dy3 (sub1 y3)))\n    (not (= (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (add1 (",
+    "(define (is-valid-triangle x1 y1 x2 y2 x3 y3)\n  (let ((dx1 (- x2 x1))\n        (dy1 (- y2 y1))\n        (dx2 (- x3 x1))\n        (dy2 (- y3 y1)))\n    (not (zero? (+ dx1 dy1 dx2 dy2)))))\n\n(define (main)\n  (let ([x1 (read)]\n        [y1 (read)]\n        [x2 (read)]\n        [y2 (read)]\n        [x3 (read)]\n        [y3 (read)])\n    (displayln (if (is-valid-triangle x1 y1 x2 y2 x3 y3) \"Yes\" \"No\"))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "1 5 2 5 4 6",
+      "output": "Yes"
+    },
+    {
+      "input": "1 1 1 4 1 5",
+      "output": "No"
+    },
+    {
+      "input": "1 1 1 1 1 1",
+      "output": "No"
+    }
+  ]
+}

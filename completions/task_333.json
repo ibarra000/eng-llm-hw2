@@ -1,0 +1,28 @@
+{
+  "task_id": 333,
+  "description": "Sort a list of sublists based on the second element (an integer) of each sublist in ascending order.",
+  "input_format": "The first line contains an integer N (number of sublists). Then N lines follow, each containing a string and an integer separated by a space.",
+  "output_format": "N lines, each containing the string and the integer of the sorted sublist, separated by a space.",
+  "prompt": "; Sort a list of sublists based on the second element (an integer) of each sublist in ascending order.\n; Input format: The first line contains an integer N (number of sublists). Then N lines follow, each containing a string and an integer separated by a space.\n; Output format: N lines, each containing the string and the integer of the sorted sublist, separated by a space.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sort-by-second-element lst)\n  (sort lst < #:key second))\n\n(define (main)\n  (let ([input (read)])\n    (for ([i (in-range (length input))])\n      (let ([sublist (list (read) (read))])\n        (displayln (sort-by-second-element sublist)))))\n\n(main)",
+    "(require racket/list)\n\n(define (sort-sublists lst)\n  (sort lst < #:key (lambda (x) (list-ref x 1))))\n\n(define (main)\n  (let ([N (read)])\n    (for ([i (in-range N)])\n      (let ([input (read)])\n        (displayln (sort-sublists (list (list (car input) (string->number (cadr input)))))))))\n\n(main)",
+    "(define (sort-by-second-element lst)\n  (sort lst < #:key second))\n\n(define (main)\n  (let ([input (read)]\n        [n (car input)]\n        [sublists (map (lambda (x) (string-split x #\\space)) (cdr input))])\n    (displayln (sort-by-second-element sublists))))\n\n(main)",
+    "(define (sort-by-second-element lst)\n  (sort lst < #:key second))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([input (read)])\n        (displayln (sort-by-second-element (list (string-take input 1) (string-take-right input 1))))))))\n\n(main)",
+    "(define (sort-sublists lst)\n  (sort lst < #:key (lambda (x) (list-ref x 1))))\n\n(define (main)\n  (let ([input (read)])\n    (for ([i (in-range (length input))])\n      (let ([sublist (list (list-ref input i) (string->number (list-ref input (add1 i))))]\n            [sorted-sublist (sort-sublists sublist)])\n        (displayln (list (list-ref sorted-sublist 0) (list-ref sorted-sublist 1))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "4\na 10\nb 5\nc 20\nd 15",
+      "output": "b 5\na 10\nd 15\nc 20"
+    },
+    {
+      "input": "4\n452 10\n256 5\n100 20\n135 15",
+      "output": "256 5\n452 10\n135 15\n100 20"
+    },
+    {
+      "input": "4\nrishi 10\nakhil 5\nramya 20\ngaur 15",
+      "output": "akhil 5\nrishi 10\ngaur 15\nramya 20"
+    }
+  ]
+}

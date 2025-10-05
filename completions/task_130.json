@@ -1,0 +1,28 @@
+{
+  "task_id": 130,
+  "description": "Write a function to find the item with maximum frequency in a given list. If multiple items have the same maximum frequency, return the one that appeared first.",
+  "input_format": "A list of integers separated by spaces.",
+  "output_format": "Two integers separated by a space: the item with maximum frequency and its count.",
+  "prompt": "; Write a function to find the item with maximum frequency in a given list. If multiple items have the same maximum frequency, return the one that appeared first.\n; Input format: A list of integers separated by spaces.\n; Output format: Two integers separated by a space: the item with maximum frequency and its count.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (max-frequency lst)\n  (define (helper lst)\n    (if (null? lst)\n        (list '() 0)\n        (let ((current (car lst))\n              (rest (cdr lst)))\n          (let ((max-count (apply max (map (lambda (x) (if (equal? x current) 1 0)) lst)))\n                (max-item (if (equal? max-count 1) current (car (filter (lambda (x) (equal? x current)) lst)))))\n            (if (equal? max-count 1)\n                (helper rest)\n                (cons (cons max-item max-count) (helper rest))))))\n  (if (null? lst)\n      (list '() 0)\n      (helper lst)))\n\n; Example usage:\n; (max-frequency '(1 2 2 3 3 3 4 4 4 4))\n; Output: (4 4)",
+    "(define (max-frequency lst)\n  (define (max-frequency-helper lst)\n    (cond\n      [(null? lst) (values '() 0)]\n      [else\n       (let ([max-item (max-frequency-helper (cdr lst))]\n             [max-count (cdr max-item)])\n         (if (> (car max-item) (car lst))\n             (values (car lst) (car max-item))\n             (values (car lst) (+ max-count 1))))]))\n  (max-frequency-helper lst))\n\n; Example usage:\n; (max-frequency '(1 2 2 3 3 3 4 4 4 4))\n; => (4 4)",
+    "(define (max-frequency lst)\n  (define (max-frequency-helper lst)\n    (cond\n      [(null? lst) (values '() 0)]\n      [(null? (cdr lst)) (values (car lst) 1)]\n      [else\n       (let ([max-item (max-frequency-helper (cdr lst))])\n         (if (> (cdr max-item) (cdr lst))\n             (values (car max-item) (cdr max-item))\n             (values (car lst) 1)))]))\n  (max-frequency-helper lst))\n\n(module+ test\n  (check-equal? (max-frequency '(1 2 3 2 1 2 3 2 1)) '(2 3))\n  (check-equal? (max-frequency '(1 2 3 2 1 2 3 2 1 2)) '(2 4))\n  (check-equal? (max-frequency '(1 1 1 1 2 2 2 2 3 3 3 3)) '(1 4)))",
+    "(define (max-frequency lst)\n  (define (helper lst)\n    (cond\n      [(empty? lst) (values '() 0)]\n      [else\n       (let ([max-item (first lst)]\n             [max-count (helper (rest lst))])\n         (if (> (count max-item lst) max-count)\n             (values max-item (count max-item lst))\n             max-count))]))\n  (helper lst))\n\n; Example usage:\n; (max-frequency '(1 2 2 3 3 3 4 4 4 4))\n; Output: (4 4)",
+    "(define (max-frequency lst)\n  (define (max-freq-helper lst)\n    (cond\n      [(empty? lst) (list '() 0)]\n      [else (let ([max-freq (max-freq-helper (rest lst))]\n                  [item (first lst)])\n              (cond\n                [(equal? (count item) (count (first max-freq)))\n                 (cons (cons item (count item)) (rest max-freq))]\n                [else (cons (cons item (count item)) max-freq)]))]))\n  (max-freq-helper lst))\n\n(define (count item lst)\n  (cond\n    [(empty? lst) 0]\n    [(equal? item (first lst)) (+ 1 (count item (rest lst)))]\n    [else (count item (rest lst))]))\n\n(define (main)\n  (displayln (max-frequency (list 1 2 3 2 1 2 3 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 "
+  ],
+  "test_cases": [
+    {
+      "input": "2 3 8 4 7 9 8 2 6 5 1 6 1 2 3 2 4 6 9 1 2",
+      "output": "2 5"
+    },
+    {
+      "input": "2 3 8 4 7 9 8 7 9 15 14 10 12 13 16 16 18",
+      "output": "8 2"
+    },
+    {
+      "input": "10 20 20 30 40 90 80 50 30 20 50 10",
+      "output": "20 3"
+    }
+  ]
+}

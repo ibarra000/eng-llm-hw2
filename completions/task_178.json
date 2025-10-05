@@ -1,0 +1,28 @@
+{
+  "task_id": 178,
+  "description": "Check if any of the given literal strings are present in the target string. Return 'Matched!' if at least one is found, otherwise 'Not Matched!'.",
+  "input_format": "Two lines. The first line contains space-separated literal strings. The second line contains the target string to search in.",
+  "output_format": "A single line containing either 'Matched!' or 'Not Matched!'.",
+  "prompt": "; Check if any of the given literal strings are present in the target string. Return 'Matched!' if at least one is found, otherwise 'Not Matched!'.\n; Input format: Two lines. The first line contains space-separated literal strings. The second line contains the target string to search in.\n; Output format: A single line containing either 'Matched!' or 'Not Matched!'.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (check-literals literals target)\n  (let loop ((i 0))\n    (cond\n      [(= i (length literals)) (if (string=? target \"\") 'Matched! 'Not Matched!)]\n      [else (if (string-contains? target (list-ref literals i)) (loop (+ i 1)) (loop (+ i 1)))])))\n\n(check-literals (list \"hello\" \"world\") \"hello world\") ; Output: Matched!\n(check-literals (list \"hello\" \"world\") \"goodbye world\") ; Output: Not Matched!",
+    "(define (literal-string-match literal-strings target-string)\n  (define (match? literal-string)\n    (string-contains? target-string literal-string))\n  (define (match-all literals)\n    (ormap match? literals))\n  (match-all literal-strings))\n\n(define literal-strings (string-split (read-line) #\\ ))\n(define target-string (read-line))\n(literal-string-match literal-strings target-string)",
+    "(define (literal-match literals target)\n  (ormap (lambda (l) (string-contains? target l)) literals))\n\n(define (main)\n  (let ([literals (map string->symbol (read-line))]\n        [target (read-line)])\n    (displayln (literal-match literals target))))\n\n(main)",
+    "(define (check-literals literals target)\n  (let loop ((literals literals) (target target))\n    (cond\n      [(null? literals) (if (string=? target \"\") 'Matched! 'Not Matched!)]\n      [(string=? (car literals) target) 'Matched!]\n      [else (loop (cdr literals) target)])))\n\n(check-literals (list \"apple\" \"banana\" \"cherry\") \"banana\")\n(check-literals (list \"apple\" \"banana\" \"cherry\") \"grape\")\n(check-literals (list \"apple\" \"banana\" \"cherry\") \"\")",
+    "(define (literal-string-match literal-strings target)\n  (define (match-helper literal-strings target)\n    (cond\n      [(empty? literal-strings) #f]\n      [(string=? (first literal-strings) target) #t]\n      [else (match-helper (rest literal-strings) target)]))\n  (match-helper literal-strings target))\n\n; Example usage:\n; (literal-string-match '(a b c) \"abc\") ; => \"Matched!\"\n; (literal-string-match '(a b c) \"def\") ; => \"Not Matched!\""
+  ],
+  "test_cases": [
+    {
+      "input": "language\npython language",
+      "output": "Matched!"
+    },
+    {
+      "input": "program\npython language",
+      "output": "Not Matched!"
+    },
+    {
+      "input": "python\nprogramming language",
+      "output": "Not Matched!"
+    }
+  ]
+}

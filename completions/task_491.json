@@ -1,0 +1,28 @@
+{
+  "task_id": 491,
+  "description": "Find the sum of a geometric progression series given the first term (a), number of terms (n), and common ratio (r). The sum is calculated using the formula: a*(r**n - 1)//(r - 1) when r != 1.",
+  "input_format": "Three integers a, n, r separated by spaces on a single line.",
+  "output_format": "A single integer representing the sum of the geometric progression.",
+  "prompt": "; Find the sum of a geometric progression series given the first term (a), number of terms (n), and common ratio (r). The sum is calculated using the formula: a*(r**n - 1)//(r - 1) when r != 1.\n; Input format: Three integers a, n, r separated by spaces on a single line.\n; Output format: A single integer representing the sum of the geometric progression.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sum-geometric a n r)\n  (if (= r 1)\n      (* a n)\n      (/ (- (* a (expt r n)) 1) (- r 1))))\n\n; Example usage:\n; (sum-geometric 2 3 3) ; Output: 20\n; (sum-geometric 1 5 2) ; Output: 31",
+    "(define (sum-geometric a n r)\n  (if (= r 1)\n      (* a n)\n      (/ (- (* a (expt r n)) 1) (- r 1))))\n\n; Example usage:\n; (sum-geometric 2 3 3) => 20\n; (sum-geometric 1 5 2) => 31",
+    "(define (sum-geometric a n r)\n  (if (= r 1)\n      (* a n)\n      (/ (- (* a (expt r n)) 1) (- r 1))))\n\n; Example usage:\n; (sum-geometric 2 5 3) ; Output: 46\n; (sum-geometric 1 4 2) ; Output: 15",
+    "(define (sum-geometric a n r)\n  (cond\n    [(= r 1) (* a n)]\n    [else (quotient (- (* a (expt r n)) 1) (- r 1))]))\n\n; Example usage:\n; (sum-geometric 2 4 3) => 40\n; (sum-geometric 1 5 2) => 31\n; (sum-geometric 5 3 2) => 45",
+    "(define (sum-geometric a n r)\n  (if (= r 1)\n      (* a n)\n      (/ (- (* a (expt r n)) 1) (- r 1))))\n\n; Example usage:\n; (sum-geometric 2 3 3) => 20\n; (sum-geometric 1 5 2) => 31"
+  ],
+  "test_cases": [
+    {
+      "input": "1 5 2",
+      "output": "31"
+    },
+    {
+      "input": "1 5 4",
+      "output": "341"
+    },
+    {
+      "input": "2 6 3",
+      "output": "728"
+    }
+  ]
+}

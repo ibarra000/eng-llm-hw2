@@ -1,0 +1,28 @@
+{
+  "task_id": 42,
+  "description": "Write a Python function to find the sum of all elements that are repeated in a given array. An element is considered repeated if it appears at least twice. For each such element, all its occurrences are included in the sum.",
+  "input_format": "Each input consists of two lines: the first line contains an integer n (the length of the array), and the second line contains n integers representing the elements of the array.",
+  "output_format": "The output is a single integer representing the sum of all repeated elements as described.",
+  "prompt": "; Write a Python function to find the sum of all elements that are repeated in a given array. An element is considered repeated if it appears at least twice. For each such element, all its occurrences are included in the sum.\n; Input format: Each input consists of two lines: the first line contains an integer n (the length of the array), and the second line contains n integers representing the elements of the array.\n; Output format: The output is a single integer representing the sum of all repeated elements as described.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sum-of-repeated-elements n elements)\n  (define (helper i acc)\n    (if (>= i n)\n        acc\n        (let ((element (list-ref elements i)))\n          (if (member element acc)\n              (helper (+ i 1) (+ acc element))\n              (helper (+ i 1) acc)))))\n  (helper 0 0))\n\n; Example usage:\n; (sum-of-repeated-elements 5 '(1 2 3 2 4))\n; => 4\n; (sum-of-repeated-elements 6 '(1 2 3 4 5 3))\n; => 6",
+    "(define (sum-of-repeated-elements arr)\n  (define (helper arr acc)\n    (cond\n      [(null? arr) acc]\n      [(member (car arr) (cdr arr))]\n      [else (helper (cdr arr) (+ acc (car arr)))]))\n  (helper arr 0))\n\n; Example usage:\n; (sum-of-repeated-elements '(1 2 3 2 4 5 2)) ; Output: 6\n; (sum-of-repeated-elements '(1 2 3 4 5)) ; Output: 0",
+    "(define (sum-of-repeated-elements n lst)\n  (define (helper lst acc)\n    (cond\n      [(null? lst) acc]\n      [(member (car lst) lst) (helper (cdr lst) (+ acc (car lst)))]\n      [else (helper (cdr lst) acc)]))\n  (helper lst 0))\n\n; Example usage:\n; (sum-of-repeated-elements 5 '(1 2 3 2 4)) ; Output: 4\n; (sum-of-repeated-elements 6 '(1 2 3 4 5 2)) ; Output: 4",
+    "(define (sum-of-repeated-elements n lst)\n  (define (helper lst acc)\n    (cond\n      [(null? lst) acc]\n      [(member (car lst) (cdr lst)) (helper (cdr lst) (+ acc (car lst)))]\n      [else (helper (cdr lst) acc)]))\n  (helper lst 0))\n\n; Example usage:\n; (sum-of-repeated-elements 5 '(1 2 3 2 4)) ; Output: 4\n; (sum-of-repeated-elements 4 '(1 2 3 4))   ; Output: 0",
+    "(define (sum-of-repeated-elements lst)\n  (define (helper lst acc)\n    (cond\n      [(null? lst) acc]\n      [(member (car lst) (cdr lst)) (helper (cdr lst) (+ acc (car lst)))]\n      [else (helper (cdr lst) acc)]))\n  (helper lst 0))\n\n; Example usage:\n; (sum-of-repeated-elements '(1 2 3 2 4 5 2)) ; Output: 6\n; (sum-of-repeated-elements '(1 2 3 4 5)) ; Output: 0"
+  ],
+  "test_cases": [
+    {
+      "input": "8\n1 2 3 1 1 4 5 6",
+      "output": "3"
+    },
+    {
+      "input": "5\n1 2 3 1 1",
+      "output": "3"
+    },
+    {
+      "input": "3\n1 1 2",
+      "output": "2"
+    }
+  ]
+}

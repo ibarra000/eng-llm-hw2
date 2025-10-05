@@ -1,0 +1,28 @@
+{
+  "task_id": 137,
+  "description": "Find the ratio of zeroes in an array of integers. The ratio is calculated as the number of zeroes divided by the total number of elements, rounded to two decimal places.",
+  "input_format": "A single line containing space-separated integers representing the array.",
+  "output_format": "A single line containing a floating-point number with exactly two decimal places.",
+  "prompt": "; Find the ratio of zeroes in an array of integers. The ratio is calculated as the number of zeroes divided by the total number of elements, rounded to two decimal places.\n; Input format: A single line containing space-separated integers representing the array.\n; Output format: A single line containing a floating-point number with exactly two decimal places.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (find-zeroes-ratio arr)\n  (let* ([zeroes (filter (lambda (x) (= x 0)) arr)]\n         [total (length arr)]\n         [ratio (/ (length zeroes) total)])\n    (round (* ratio 100.0) 2)))\n\n(define (main)\n  (let ([input (read-line)])\n    (display (find-zeroes-ratio (map string->number (string-split input \" \"))))))\n\n(main)",
+    "(define (find-zeroes-ratio arr)\n  (let* ([total (length arr)]\n         [zeroes (filter (lambda (x) (= x 0)) arr)]\n         [ratio (/ (length zeroes) total)])\n    (round (* ratio 100.0)) / 100.0))\n\n(module+ test\n  (require rackunit)\n  (check-equal? (find-zeroes-ratio '(1 0 2 0 3)) 0.40)\n  (check-equal? (find-zeroes-ratio '(0 0 0 0 0)) 1.00)\n  (check-equal? (find-zeroes-ratio '(1 2 3 4 5)) 0.00))\n\n(module+ main\n  (displayln (find-zeroes-ratio (read-line))))",
+    "(define (find-zeroes-ratio arr)\n  (let* ([zeroes (filter (lambda (x) (= x 0)) arr)]\n         [total (length arr)]\n         [ratio (/ (length zeroes) total)])\n    (round (* ratio 100) 2)))\n\n(define (main)\n  (let ([arr (map (lambda (x) (read)) (string-split (read-line) #\\space))])\n    (display (find-zeroes-ratio arr))))\n\n(main)",
+    "(define (find-zeroes-ratio arr)\n  (let* ([zeroes (filter (lambda (x) (= x 0)) arr)]\n         [total (length arr)]\n         [ratio (/ (length zeroes) total)])\n    (round (* ratio 100.0)) / 100.0))\n\n(define (main)\n  (let ([input (read)])\n    (display (find-zeroes-ratio (map string->number (string-split input \" \"))))))\n\n(main)",
+    "(define (find-zeroes-ratio arr)\n  (let ([zeroes (length (filter (lambda (x) (= x 0)) arr))]\n        [total (length arr)])\n    (if (zero? total)\n        0.0\n        (/ zeroes total))))\n\n(define (main)\n  (let ([input (read-line)])\n    (let ([arr (map (lambda (x) (string->number x)) (string-split input \" \"))])\n      (display (find-zeroes-ratio arr)))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "0 1 2 -1 -5 6 0 -3 -2 3 4 6 8",
+      "output": "0.15"
+    },
+    {
+      "input": "2 1 2 -1 -5 6 4 -3 -2 3 4 6 8",
+      "output": "0.00"
+    },
+    {
+      "input": "2 4 -6 -9 11 -12 14 -5 17",
+      "output": "0.00"
+    }
+  ]
+}

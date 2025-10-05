@@ -1,0 +1,28 @@
+{
+  "task_id": 193,
+  "description": "Write a function to remove the duplicates from the given tuple.",
+  "input_format": "A single line containing the elements of the tuple, enclosed in parentheses and separated by spaces.",
+  "output_format": "A single line containing the elements of the resulting tuple, enclosed in parentheses and separated by spaces.",
+  "prompt": "; Write a function to remove the duplicates from the given tuple.\n; Input format: A single line containing the elements of the tuple, enclosed in parentheses and separated by spaces.\n; Output format: A single line containing the elements of the resulting tuple, enclosed in parentheses and separated by spaces.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (remove-duplicates tuple)\n  (define (remove-duplicates-helper lst)\n    (cond\n      [(empty? lst) '()]\n      [(member (first lst) (rest lst)) (remove-duplicates-helper (rest (remove-duplicates-helper (rest lst))))]\n      [else (cons (first lst) (remove-duplicates-helper (rest lst)))]))\n  (remove-duplicates-helper tuple))\n\n(define (main)\n  (displayln (remove-duplicates (read-line))))\n\n(main)",
+    "(define (remove-duplicates tuple)\n  (define (remove-duplicates-helper lst)\n    (cond\n      [(empty? lst) '()]\n      [(member (first lst) (rest lst))\n       (remove-duplicates-helper (rest (rest lst)))]\n      [else (cons (first lst) (remove-duplicates-helper (rest lst)))]))\n  (remove-duplicates-helper tuple))\n\n(define (main)\n  (let ([input (read)])\n    (displayln (remove-duplicates (string->list input)))))\n\n(main)",
+    "(define (remove-duplicates tuple)\n  (define (remove-duplicates-helper lst)\n    (cond\n      [(empty? lst) '()]\n      [(member (first lst) (rest lst))\n       (remove-duplicates-helper (rest (remove-duplicates-helper (rest lst)))))\n      [else (cons (first lst) (remove-duplicates-helper (rest lst)))]))\n  (remove-duplicates-helper (list->list tuple)))\n\n(define (main)\n  (displayln (remove-duplicates (list->list (read-line)))))\n\n\n(main)",
+    "(define (remove-duplicates tuple)\n  (define (remove-duplicates-helper lst)\n    (cond\n      [(null? lst) '()]\n      [(member (car lst) (cdr lst))\n       (remove-duplicates-helper (cdr lst))]\n      [else (cons (car lst) (remove-duplicates-helper (cdr lst)))]))\n  (remove-duplicates-helper tuple))\n\n(define (main)\n  (displayln (remove-duplicates (read-line))))\n\n(main)",
+    "(define (remove-duplicates tuple)\n  (define (remove-duplicates-helper lst)\n    (cond\n      [(null? lst) '()]\n      [(member (car lst) (cdr lst)) (remove-duplicates-helper (cdr lst))]\n      [else (cons (car lst) (remove-duplicates-helper (cdr lst)))]))\n  (remove-duplicates-helper tuple))\n\n(define (main)\n  (let ([input (read)])\n    (displayln (remove-duplicates (string->list (string-append \"(\" input \")\"))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "(1 3 5 2 3 5 1 1 3)",
+      "output": "(1 2 3 5)"
+    },
+    {
+      "input": "(2 3 4 4 5 6 6 7 8 8)",
+      "output": "(2 3 4 5 6 7 8)"
+    },
+    {
+      "input": "(11 12 13 11 11 12 14 13)",
+      "output": "(11 12 13 14)"
+    }
+  ]
+}

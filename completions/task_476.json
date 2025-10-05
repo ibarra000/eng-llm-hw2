@@ -1,0 +1,28 @@
+{
+  "task_id": 476,
+  "description": "Find the sum of the largest and smallest value in a given array of integers.",
+  "input_format": "A single line containing space-separated integers.",
+  "output_format": "An integer representing the sum of the largest and smallest values in the array.",
+  "prompt": "; Find the sum of the largest and smallest value in a given array of integers.\n; Input format: A single line containing space-separated integers.\n; Output format: An integer representing the sum of the largest and smallest values in the array.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sum-largest-and-smallest values)\n  (let ((max-value (apply max values))\n        (min-value (apply min values)))\n    (+ max-value min-value)))\n\n(define (main)\n  (let ((input (read-line)))\n    (let ((values (map string->number (string-split input))))\n      (displayln (sum-largest-and-smallest values)))))\n\n(main)",
+    "(define (sum-largest-and-smallest values)\n  (+ (apply max values) (apply min values)))\n\n(define (main)\n  (let ([values (map string->number (string-split (read-line) #\\space))])\n    (displayln (sum-largest-and-smallest values))))\n\n(main)",
+    "(define (sum-of-largest-and-smallest values)\n  (let ((max-value (apply max values))\n        (min-value (apply min values)))\n    (+ max-value min-value)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-largest-and-smallest '(3 1 4 1 5 9 2 6 5 3 5)) => 18\n;; (sum-of-largest-and-smallest '(10 20 30 40 50)) => 60\n;; (sum-of-largest-and-smallest '(7 8 9 10)) => 17\n;; (sum-of-largest-and-smallest '(1)) => 2",
+    "(define (sum-largest-and-smallest values)\n  (let* ([largest (apply max values)]\n         [smallest (apply min values)])\n    (+ largest smallest)))\n\n(module+ test\n  (require rackunit)\n  (check-equal? (sum-largest-and-smallest '(1 2 3 4 5)) 6)\n  (check-equal? (sum-largest-and-smallest '(10 20 30 40 50)) 60)\n  (check-equal? (sum-largest-and-smallest '(100 200 300 400 500)) 800))",
+    "(define (sum-largest-and-smallest values)\n  (let ((largest (apply max values))\n        (smallest (apply min values)))\n    (+ largest smallest)))\n\n; Example usage:\n; (sum-largest-and-smallest '(1 2 3 4 5)) ; Output: 6\n; (sum-largest-and-smallest '(10 20 30 40 50)) ; Output: 60"
+  ],
+  "test_cases": [
+    {
+      "input": "1 2 3",
+      "output": "4"
+    },
+    {
+      "input": "-1 2 3 4",
+      "output": "3"
+    },
+    {
+      "input": "2 3 6",
+      "output": "8"
+    }
+  ]
+}

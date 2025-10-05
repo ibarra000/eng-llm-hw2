@@ -1,0 +1,28 @@
+{
+  "task_id": 353,
+  "description": "Write a function to remove a specified column from a given nested list.",
+  "input_format": "The input consists of:\n- First line: integer N (number of sublists)\n- Next N lines: each line contains space-separated integers representing a sublist\n- Last line: integer K (the column index to remove)",
+  "output_format": "N lines, each containing space-separated integers of the modified sublist after removing the K-th column",
+  "prompt": "; Write a function to remove a specified column from a given nested list.\n; Input format: The input consists of:\n- First line: integer N (number of sublists)\n- Next N lines: each line contains space-separated integers representing a sublist\n- Last line: integer K (the column index to remove)\n; Output format: N lines, each containing space-separated integers of the modified sublist after removing the K-th column\n\n#lang racket\n\n",
+  "completions": [
+    "(define (remove-column lst k)\n  (map (lambda (row)\n         (map (lambda (col)\n                (if (= col k) 0 (col)))\n              row))\n       lst))\n\n(define (main)\n  (let ([n (read)])\n    (let ([sublists (for/list ([i n])\n                      (map (lambda (x) (string->number (string x)))\n                            (read-line)))]\n          [k (read)])\n      (for ([i (in-range n)])\n        (displayln (remove-column sublists i)))))\n\n(main)",
+    "(define (remove-column nested-list k)\n  (map (lambda (row)\n         (remove-ref row k))\n       nested-list))\n\n(define (remove-ref lst index)\n  (if (null? lst)\n      '()\n      (cons (list-ref lst index)\n            (remove-ref (cdr lst) index))))\n\n(define (main)\n  (let ([N (read)])\n    (let ([nested-list (for/list ([i N])\n                         (read-line))]\n          [K (read)])\n      (for ([row (remove-column nested-list K)])\n        (displayln row)))))\n\n(main)",
+    "(define (remove-column lst k)\n  (map (lambda (row)\n         (map (lambda (col)\n                (if (= k col)\n                    (error \"Column index out of range\")\n                    col))\n              row))\n       lst))\n\n(define (main)\n  (let ([n (read)])\n    (let loop ([i 0])\n      (if (= i n)\n          (begin\n            (displayln (remove-column (read) (read)))\n            (loop (+ i 1)))\n          (begin\n            (displayln (read))\n            (loop (+ i 1)))))))\n\n(main)",
+    "(define (remove-column lst k)\n  (map (lambda (row)\n         (remove-ref row k))\n       lst))\n\n(define (remove-ref lst k)\n  (if (zero? k)\n      (error \"Column index out of bounds\")\n      (let ([new-lst (map (lambda (x) (remove-ref x k)) lst)])\n        (if (null? new-lst)\n            (error \"Column index out of bounds\")\n            (list-ref new-lst (- k 1))))))\n\n(define (main)\n  (let ([n (read)])\n    (let loop ([i 0])\n      (if (= i n)\n          (begin\n            (displayln (remove-column (read) (read)))\n            (loop (+ i 1)))\n          (begin\n            (displayln (read))\n            (loop (+ i 1)))))))\n\n(main)",
+    "(define (remove-column nested-list k)\n  (define (remove-column-helper nested-list k)\n    (cond\n      [(null? nested-list) '()]\n      [else\n       (cons (remove-column-helper (cdr nested-list) k)\n             (remove-column-helper (cadr nested-list) k))]))\n  (remove-column-helper nested-list k))\n\n(define (main)\n  (let ([N (read)])\n    (let ([sublists (for/list ([i N]) (read-line))])\n      (let ([K (read)])\n        (let ([modified-sublists (remove-column sublists K)])\n          (for ([modified-sublist modified-sublists])\n            (displayln modified-sublist)))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "3\n1 2 3\n2 4 5\n1 1 1\n0",
+      "output": "2 3\n4 5\n1 1"
+    },
+    {
+      "input": "3\n1 2 3\n-2 4 -5\n1 -1 1\n2",
+      "output": "1 2\n-2 4\n1 -1"
+    },
+    {
+      "input": "6\n1 3\n5 7\n1 3\n13 15 17\n5 7\n9 11\n0",
+      "output": "3\n7\n3\n15 17\n7\n11"
+    }
+  ]
+}

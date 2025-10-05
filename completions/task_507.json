@@ -1,0 +1,28 @@
+{
+  "task_id": 507,
+  "description": "Write a function to remove specific words from a given list. The function should take two lists as input: the first is the original list of words, and the second contains the words to remove. The output should be a new list with the specified words removed, preserving the original order of the remaining elements.",
+  "input_format": "Two lines of input. The first line contains space-separated words from the original list. The second line contains space-separated words to remove.",
+  "output_format": "A single line containing the filtered list of words, separated by spaces.",
+  "prompt": "; Write a function to remove specific words from a given list. The function should take two lists as input: the first is the original list of words, and the second contains the words to remove. The output should be a new list with the specified words removed, preserving the original order of the remaining elements.\n; Input format: Two lines of input. The first line contains space-separated words from the original list. The second line contains space-separated words to remove.\n; Output format: A single line containing the filtered list of words, separated by spaces.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (remove-words original-words to-remove)\n  (let ((filtered-words (remove to-remove original-words)))\n    (map string->symbol filtered-words)))\n\n(define (main)\n  (let* ((original-words (read-line))\n         (to-remove (read-line)))\n    (displayln (remove-words original-words to-remove))))\n\n(main)",
+    "(define (remove-words original-words to-remove)\n  (let ((filtered-words (map (lambda (word) (if (member word to-remove) #f word)) original-words)))\n    (filter (lambda (word) (not (eq? word #f))) filtered-words)))\n\n(define (main)\n  (let* ((original-words (string-split (read-line) #\\ ))\n         (to-remove (string-split (read-line) #\\ )))\n    (displayln (remove-words original-words to-remove))))\n\n(main)",
+    "(define (remove-words original-words to-remove)\n  (let ((filtered-words (map (lambda (word) (if (member word to-remove) #f word)) original-words)))\n    (filter (lambda (word) (not (eq? word #f))) filtered-words)))\n\n(define (main)\n  (let* ((original-words (map string->symbol (read-line)))\n         (to-remove (map string->symbol (read-line))))\n    (displayln (remove-words original-words to-remove))))\n\n(main)",
+    "(define (remove-words original-words to-remove)\n  (let ((filtered-words (remove (lambda (word) (member word to-remove)) original-words)))\n    (map (lambda (word) (string->symbol word)) filtered-words)))\n\n(define (main)\n  (let* ((original-words (string-split (read-line) #\\ ))\n         (to-remove (string-split (read-line) #\\ ))\n         (filtered-words (remove-words original-words to-remove)))\n    (displayln (string-join filtered-words #\\ ))))\n\n(main)",
+    "(define (remove-words original-words to-remove)\n  (map (lambda (word) (if (member word to-remove) #f word)) original-words))\n\n(define (main)\n  (let ([original-words (read-line)]\n        [to-remove (read-line)])\n    (display (remove-words original-words to-remove))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "red green blue white black orange\nwhite orange",
+      "output": "red green blue black"
+    },
+    {
+      "input": "red green blue white black orange\nblack orange",
+      "output": "red green blue white"
+    },
+    {
+      "input": "red green blue white black orange\nblue white",
+      "output": "red green black orange"
+    }
+  ]
+}

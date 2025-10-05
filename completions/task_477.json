@@ -1,0 +1,28 @@
+{
+  "task_id": 477,
+  "description": "Convert a given string to lowercase.",
+  "input_format": "A single line containing the string to be converted.",
+  "output_format": "A single line containing the lowercase version of the input string.",
+  "prompt": "; Convert a given string to lowercase.\n; Input format: A single line containing the string to be converted.\n; Output format: A single line containing the lowercase version of the input string.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (to-lowercase str)\n  (string->symbol (string-downcase str)))\n\n;; Sample Input-Output Pairs\n;; (to-lowercase \"Hello World\") => \"hello world\"\n;; (to-lowercase \"Racket\") => \"racket\"",
+    "(define (to-lowercase str)\n  (string->symbol (string-downcase str)))\n\n;; Sample Input-Output Pairs\n;; (to-lowercase \"Hello World\") => \"hello world\"\n;; (to-lowercase \"Racket Programming\") => \"racket programming\"",
+    "(define (string-to-lowercase str)\n  (string-downcase str))\n\n;; Sample Input-Output Pairs\n;; (string-to-lowercase \"Hello World\") => \"hello world\"\n;; (string-to-lowercase \"Racket Programming\") => \"racket programming\"",
+    "(define (to-lowercase str)\n  (string-downcase str))\n\n;; Sample Input-Output Pairs\n;; (to-lowercase \"Hello World\") => \"hello world\"\n;; (to-lowercase \"Racket Programming\") => \"racket programming\"",
+    "(define (to-lowercase str)\n  (string->symbol (string-downcase str)))\n\n;; Sample Input-Output Pairs\n;; (to-lowercase \"Hello World\") => \"hello world\"\n;; (to-lowercase \"Racket Programming\") => \"racket programming\""
+  ],
+  "test_cases": [
+    {
+      "input": "InValid",
+      "output": "invalid"
+    },
+    {
+      "input": "TruE",
+      "output": "true"
+    },
+    {
+      "input": "SenTenCE",
+      "output": "sentence"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "task_id": 443,
+  "description": "Find the smallest negative number (most negative) from the given list of integers.",
+  "input_format": "A single line containing space-separated integers representing the list.",
+  "output_format": "A single integer, the smallest negative number in the list.",
+  "prompt": "; Find the smallest negative number (most negative) from the given list of integers.\n; Input format: A single line containing space-separated integers representing the list.\n; Output format: A single integer, the smallest negative number in the list.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (find-smallest-negative numbers)\n  (let loop ((numbers numbers)\n             (smallest #e+inf))\n    (cond\n      ((null? numbers) smallest)\n      ((< (car numbers) 0)\n       (loop (cdr numbers) (min smallest (car numbers))))\n      (else (loop (cdr numbers) smallest)))))\n\n(define (main)\n  (let ([numbers (map string->number (read-line))])\n    (display (find-smallest-negative numbers))))\n\n(main)",
+    "(define (find-smallest-negative numbers)\n  (define (smallest-negative-helper numbers)\n    (cond\n      [(empty? numbers) #f]\n      [(negative? (first numbers))\n       (if (or (empty? numbers) (negative? (first numbers)))\n           (first numbers)\n           (smallest-negative-helper (rest numbers)))]\n      [else (smallest-negative-helper (rest numbers))]))\n  (smallest-negative-helper numbers))\n\n(define (main)\n  (displayln (find-smallest-negative (map string->number (read-line)))))\n\n(main)",
+    "(define (smallest-negative number-list)\n  (define (smallest-negative-helper number-list)\n    (cond\n      [(empty? number-list) (error \"List is empty\")]\n      [(negative? (first number-list))\n       (if (empty? (rest number-list))\n           (first number-list)\n           (if (negative? (first (rest number-list)))\n               (first number-list)\n               (smallest-negative-helper (rest number-list)))))\n      [else (smallest-negative-helper (rest number-list))]))\n  (smallest-negative-helper number-list))\n\n;; Sample Input-Output Pairs\n;; (smallest-negative '(1 -2 3 -4 5)) => -4\n;; (smallest-negative '(-1 -2 -3 -4)) => -4\n;; (smallest-negative '(1 2 3 4)) => #f\n;; (smallest-negative '()) => error: List is empty",
+    "(define (find-smallest-negative numbers)\n  (define (smallest-negative-helper numbers)\n    (cond\n      [(empty? numbers) #f]\n      [(negative? (first numbers)) (first numbers)]\n      [else (smallest-negative-helper (rest numbers))]))\n  (smallest-negative-helper numbers))\n\n(define (main)\n  (displayln (find-smallest-negative (map string->number (read-line)))))\n\n(main)",
+    "(define (find-smallest-negative numbers)\n  (let loop ((numbers numbers) (smallest #e+1))\n    (cond\n      ((null? numbers) smallest)\n      ((< (car numbers) 0) (loop (cdr numbers) (car numbers)))\n      (else (loop (cdr numbers) smallest)))))\n\n(define (main)\n  (let ((numbers (read-line)))\n    (display (find-smallest-negative (map string->number (string-split numbers #\\space))))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "1 2 3 -4 -6",
+      "output": "-6"
+    },
+    {
+      "input": "1 2 3 -8 -9",
+      "output": "-9"
+    },
+    {
+      "input": "1 2 3 4 -1",
+      "output": "-1"
+    }
+  ]
+}

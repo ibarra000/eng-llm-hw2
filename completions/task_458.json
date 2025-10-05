@@ -1,0 +1,28 @@
+{
+  "task_id": 458,
+  "description": "Write a function to find the area of a rectangle given its length and width.",
+  "input_format": "Two integers on the same line, separated by a space. The first integer represents the length, and the second represents the width of the rectangle.",
+  "output_format": "A single integer representing the area of the rectangle, followed by a newline.",
+  "prompt": "; Write a function to find the area of a rectangle given its length and width.\n; Input format: Two integers on the same line, separated by a space. The first integer represents the length, and the second represents the width of the rectangle.\n; Output format: A single integer representing the area of the rectangle, followed by a newline.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (rectangle-area length width)\n  (* length width))\n\n; Example usage:\n; (rectangle-area 5 10) => 50\n; (rectangle-area 7 3) => 21",
+    "(define (area length width)\n  (* length width))\n\n(area 5 10)",
+    "(define (area length width)\n  (* length width))\n\n; Example usage:\n; (area 5 10) => 50\n; (area 7 3) => 21",
+    "(define (area length width)\n  (* length width))\n\n(area 5 10)",
+    "(define (area length width)\n  (* length width))\n\n(area 5 10)"
+  ],
+  "test_cases": [
+    {
+      "input": "10 20",
+      "output": "200\n"
+    },
+    {
+      "input": "10 5",
+      "output": "50\n"
+    },
+    {
+      "input": "4 2",
+      "output": "8\n"
+    }
+  ]
+}

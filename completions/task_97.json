@@ -1,0 +1,28 @@
+{
+  "task_id": 97,
+  "description": "Write a function to find the frequency count of elements in a list of lists. For each integer in all sublists, count how many times it appears overall.",
+  "input_format": "The input consists of several lines. Each line contains space-separated integers representing a sublist.",
+  "output_format": "A JSON object where each key is an integer and the value is the number of times it appears across all sublists. Keys and values are separated by colons, and the entire object is enclosed in curly braces. Different key-value pairs are separated by commas followed by a space.",
+  "prompt": "; Write a function to find the frequency count of elements in a list of lists. For each integer in all sublists, count how many times it appears overall.\n; Input format: The input consists of several lines. Each line contains space-separated integers representing a sublist.\n; Output format: A JSON object where each key is an integer and the value is the number of times it appears across all sublists. Keys and values are separated by colons, and the entire object is enclosed in curly braces. Different key-value pairs are separated by commas followed by a space.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (count-elements lst)\n  (define (helper lst acc)\n    (if (null? lst)\n        acc\n        (helper (cdr lst) (cons (length (filter (lambda (x) (= x (car lst))) lst)) acc))))\n  (helper lst '()))\n\n(define (main)\n  (let ([input (read)])\n    (displayln (list->json (count-elements input)))))\n\n(main)",
+    "(define (count-frequencies lst)\n  (define (helper lst acc)\n    (cond\n      [(null? lst) (reverse acc)]\n      [else (helper (cdr lst) (cons (length (filter (lambda (x) (= x (car lst))) lst)) acc))]))\n  (helper lst '()))\n\n(define (main)\n  (let ([input (read-line)])\n    (let ([lst (string-split input)])\n      (let ([result (count-frequencies lst)])\n        (displayln (list->string (map (lambda (x) (string-append (number->string x) \":\" (number->string (car result)))) (sort (map car result) <))))))))\n\n(main)",
+    "(define (count-frequencies lst)\n  (let ((counts (make-hash)))\n    (for-each (lambda (sublist)\n                (for-each (lambda (x)\n                            (hash-update! counts x (lambda (v) (+ v 1)) 0))\n                        sublist))\n              lst)\n    (hash->list counts)))\n\n(define (main)\n  (let ((input (read-line)))\n    (let ((sublists (string-split input \"\\n\")))\n      (let ((result (count-frequencies sublists)))\n        (displayln (format \"Result: ~a\" result)))))\n\n(main)",
+    "(define (count-frequencies lst)\n  (define (count-freqs lst)\n    (if (null? lst)\n        '()\n        (cons (cons (car lst) (apply + (map (lambda (x) (if (equal? x (car lst)) 1 0)) lst))) (count-freqs (cdr lst)))))\n  (map (lambda (x) (cons (car x) (apply + (map (lambda (y) (if (equal? y (car x)) 1 0)) x)))) (count-freqs lst)))\n\n(define (main)\n  (let ([input (read)])\n    (displayln (list->string (map (lambda (x) (list->string (cons (car x) (apply + (map (lambda (y) (if (equal? y (car x)) 1 0)) x))))) (count-frequencies input)))))\n\n(main)",
+    "(require json)\n\n(define (count-frequencies lst)\n  (let loop ((lst lst)\n             (result '()))\n    (cond\n      ((null? lst) (list->json result))\n      ((not (list? (car lst)))\n       (loop (cdr lst) (cons (list (car lst) 1) result)))\n      (else\n       (let ((count (apply + (map (lambda (x) (if (equal? x (car lst)) 1 0)) (cdr lst)))))\n         (loop (cdr lst) (cons (list (car lst) count) result)))))))\n\n(define (main)\n  (let ((input (read-line)))\n    (displayln (count-frequencies (string-split input #\\space)))))\n\n(main)"
+  ],
+  "test_cases": [
+    {
+      "input": "1 2 3 2\n4 5 6 2\n7 8 9 5",
+      "output": "{1: 1, 2: 3, 3: 1, 4: 1, 5: 2, 6: 1, 7: 1, 8: 1, 9: 1}"
+    },
+    {
+      "input": "1 2 3 4\n5 6 7 8\n9 10 11 12",
+      "output": "{1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1}"
+    },
+    {
+      "input": "20 30 40 17\n18 16 14 13\n10 20 30 40",
+      "output": "{20: 2, 30: 2, 40: 2, 17: 1, 18: 1, 16: 1, 14: 1, 13: 1, 10: 1}"
+    }
+  ]
+}

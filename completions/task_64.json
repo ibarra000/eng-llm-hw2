@@ -1,0 +1,28 @@
+{
+  "task_id": 64,
+  "description": "Sort a list of subject and mark tuples by the mark in ascending order using a lambda function.",
+  "input_format": "The first line contains an integer N (number of tuples). This is followed by N lines, each containing a subject (possibly with spaces) and an integer mark separated by a space.",
+  "output_format": "N lines, each containing the subject and mark separated by a space, sorted in ascending order of the mark.",
+  "prompt": "; Sort a list of subject and mark tuples by the mark in ascending order using a lambda function.\n; Input format: The first line contains an integer N (number of tuples). This is followed by N lines, each containing a subject (possibly with spaces) and an integer mark separated by a space.\n; Output format: N lines, each containing the subject and mark separated by a space, sorted in ascending order of the mark.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sort-by-mark input)\n  (sort input\n        (lambda (a b)\n          (< (second a) (second b)))))\n\n(define (main)\n  (let ([input (read)])\n    (displayln (sort-by-mark input))))\n\n(main)",
+    "(define (sort-by-mark tuples)\n  (sort tuples (lambda (a b) (< (second a) (second b)))))\n\n(define (main)\n  (let ([n (read)])\n    (for ([i (in-range n)])\n      (let ([line (read-line)])\n        (let ([subject (string-split line \" \")]\n              [mark (string->number (string-join (cdr subject) \" \"))])\n          (displayln (string-join (list subject mark) \" \")))))))\n\n(main)",
+    "(define (sort-by-mark input)\n  (define (parse-line line)\n    (let ([parts (string-split line)])\n      (values (string->symbol (car parts)) (string->number (cadr parts)))))\n\n  (define (sort-tuples)\n    (sort (map parse-line input) (lambda (a b) (< (cdr a) (cdr b)))))\n\n  (map (lambda (tuple) (list (car tuple) (cdr tuple))) (sort-tuples)))\n\n;; Example usage:\n;; (sort-by-mark '(S1 85 S2 90 S3 78 S4 88))\n;; Expected output:\n;; (S3 78 S1 85 S4 88 S2 90)",
+    "(define (sort-by-mark input)\n  (sort input\n        (lambda (a b)\n          (<= (string->number (substring (car a) 1))\n              (string->number (substring (car b) 1))))))\n\n(define (main)\n  (let ([input (read)])\n    (sort-by-mark input)))\n\n(module+ main\n  (main))",
+    "(define (sort-by-mark input)\n  (sort input (lambda (a b) (< (second a) (second b)))))\n\n(define (main)\n  (let ([input (read)])\n    (sort-by-mark input)))\n\n(module+ main\n  (main))"
+  ],
+  "test_cases": [
+    {
+      "input": "4\nEnglish 88\nScience 90\nMaths 97\nSocial sciences 82",
+      "output": "Social sciences 82\nEnglish 88\nScience 90\nMaths 97"
+    },
+    {
+      "input": "3\nTelugu 49\nHindhi 54\nSocial 33",
+      "output": "Social 33\nTelugu 49\nHindhi 54"
+    },
+    {
+      "input": "3\nPhysics 96\nChemistry 97\nBiology 45",
+      "output": "Biology 45\nPhysics 96\nChemistry 97"
+    }
+  ]
+}

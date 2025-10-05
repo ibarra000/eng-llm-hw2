@@ -1,0 +1,28 @@
+{
+  "task_id": 398,
+  "description": "Compute the sum of digits of each valid integer in a list. The list contains elements that are either integers or strings. Only process elements that are integers (ignoring their sign), sum their digits, and return the total sum.",
+  "input_format": "The first line contains an integer N, the number of elements. Then N lines follow, each containing a single element as a string, which can be a valid integer (e.g., '123', '-45') or another string.",
+  "output_format": "A single integer, the sum of the digits of all valid integers in the input list.",
+  "prompt": "; Compute the sum of digits of each valid integer in a list. The list contains elements that are either integers or strings. Only process elements that are integers (ignoring their sign), sum their digits, and return the total sum.\n; Input format: The first line contains an integer N, the number of elements. Then N lines follow, each containing a single element as a string, which can be a valid integer (e.g., '123', '-45') or another string.\n; Output format: A single integer, the sum of the digits of all valid integers in the input list.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (sum-of-digits lst)\n  (define (digit-sum n)\n    (if (<= n 0)\n        0\n        (+ (modulo n 10) (digit-sum (quotient n 10)))))\n  (define (process-element e)\n    (if (and (number? e) (not (negative? e)))\n        (digit-sum e)\n        0))\n  (apply + (map process-element lst)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-digits '(123 -45 67 890)) => 24\n;; (sum-of-digits '(123 456 789)) => 21\n;; (sum-of-digits '()) => 0\n;; (sum-of-digits '(abc -123 456)) => 15\n\n;; Test cases\n(check-equal? (sum-of-digits '(123 -45 67 890)) 24)\n(check-equal? (sum-of-digits '(123 456 789)) 21)\n(check-equal? (sum-of-digits '()) 0)\n(check-equal? (sum-of-digits '(abc -123 456)) 15)",
+    "(define (sum-of-digits lst)\n  (define (digit-sum n)\n    (if (<= n 0)\n        0\n        (+ (modulo n 10) (digit-sum (quotient n 10)))))\n  (define (process-element elem)\n    (if (and (number? elem) (not (negative? elem)))\n        (digit-sum elem)\n        0))\n  (foldl + 0 (map process-element lst)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-digits '(123 -45 678 90)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0 -123)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0 -123 0)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0 -123 0 -123)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0 -123 0 -123 0)) => 24\n;; (sum-of-digits '(123 -45 678 90 -123 0 -123 0 -123 0 -123 0 -123)) => 24\n;; (sum-of-digits '(",
+    "(define (sum-of-digits lst)\n  (define (digit-sum n)\n    (if (<= n 0)\n        0\n        (+ (modulo n 10) (digit-sum (quotient n 10)))))\n  (define (process-element e)\n    (if (and (integer? e) (not (negative? e)))\n        (digit-sum e)\n        0))\n  (foldl + 0 (map process-element lst)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-digits '(123 -45 678 90 -1234)) => 24\n;; (sum-of-digits '(abc -def 123 456 -789)) => 24\n;; (sum-of-digits '(123 456 789)) => 24\n;; (sum-of-digits '()) => 0\n;; (sum-of-digits '(123 456 -789)) => 24",
+    "(define (sum-of-digits lst)\n  (define (digit-sum n)\n    (if (<= n 9)\n        n\n        (+ (remainder n 10) (digit-sum (quotient n 10)))))\n  (define (process-element element)\n    (if (and (string? element) (number? (string->number element)))\n        (digit-sum (string->number element))\n        0))\n  (foldl + 0 (map process-element lst)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-digits '(123 -45 678 90)) => 24\n;; (sum-of-digits '(abc -123 def 456)) => 18\n;; (sum-of-digits '()) => 0",
+    "(define (sum-of-digits lst)\n  (define (process-element elem)\n    (if (and (string? elem) (number? (string->number elem)))\n        (let ([num (string->number elem)])\n          (+ (if (negative? num) (- num) num)\n             (apply + (map (lambda (x) (if (char-alphabetic? x) 0 (string->number (string x)))) (string->list (number->string num))))))\n        0))\n  (apply + (map process-element lst)))\n\n;; Sample Input-Output Pairs\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) => 24\n;; (sum-of-digits '(123 -45 678 'abc -90)) =>"
+  ],
+  "test_cases": [
+    {
+      "input": "3\n10\n2\n56",
+      "output": "14"
+    },
+    {
+      "input": "7\n10\n20\n4\n5\nb\n70\na",
+      "output": "19"
+    },
+    {
+      "input": "5\n10\n20\n-4\n5\n-70",
+      "output": "19"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "task_id": 329,
+  "description": "Given a list of integers, count the number of negative numbers in the list.",
+  "input_format": "A single line containing integers separated by spaces.",
+  "output_format": "A single integer representing the count of negative numbers, followed by a newline.",
+  "prompt": "; Given a list of integers, count the number of negative numbers in the list.\n; Input format: A single line containing integers separated by spaces.\n; Output format: A single integer representing the count of negative numbers, followed by a newline.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (count-negative-numbers lst)\n  (define (helper lst acc)\n    (cond\n      [(empty? lst) acc]\n      [(negative? (first lst)) (helper (rest lst) (+ acc 1))]\n      [else (helper (rest lst) acc)]))\n  (helper lst 0))\n\n; Example usage:\n; (count-negative-numbers '(1 -2 3 -4 5)) ; Output: 2\n; (count-negative-numbers '(1 2 3 4 5))   ; Output: 0",
+    "(define (count-negative-numbers lst)\n  (define (helper lst acc)\n    (cond\n      [(empty? lst) acc]\n      [else (if (negative? (first lst))\n                (helper (rest lst) (+ acc 1))\n                (helper (rest lst) acc))]))\n  (helper lst 0))\n\n; Example usage:\n; (count-negative-numbers '(1 -2 3 -4 5)) ; Output: 2\n; (count-negative-numbers '(1 2 3 4 5))   ; Output: 0",
+    ";; Function to count the number of negative numbers in a list\n(define (count-negative-numbers lst)\n  (define (helper lst count)\n    (cond\n      [(empty? lst) count]\n      [(negative? (first lst)) (helper (rest lst) (+ count 1))]\n      [else (helper (rest lst) count)]))\n  (helper lst 0))\n\n;; Example usage\n;; (count-negative-numbers '(1 -2 3 -4 5)) => 2\n;; (count-negative-numbers '(1 2 3 4 5)) => 0\n;; (count-negative-numbers '(-1 -2 -3 -4 -5)) => 5\n\n;; Sample input-output pairs\n;; (count-negative-numbers '(1 -2 3 -4 5)) => 2\n;; (count-negative-numbers '(1 2 3 4 5)) => 0\n;; (count-negative-numbers '(-1 -2 -3 -4 -5)) => 5",
+    "(define (count-negative-numbers lst)\n  (define (helper lst count)\n    (cond\n      [(empty? lst) count]\n      [else (if (negative? (first lst))\n                (helper (rest lst) (+ count 1))\n                (helper (rest lst) count))]))\n  (helper lst 0))\n\n; Example usage:\n; (count-negative-numbers '(1 -2 3 -4 5)) ; Output: 2\n; (count-negative-numbers '()) ; Output: 0\n; (count-negative-numbers '(1 2 3 4 5)) ; Output: 0",
+    "(define (count-negative-numbers lst)\n  (define (helper lst count)\n    (cond\n      [(empty? lst) count]\n      [else (if (negative? (first lst))\n                (helper (rest lst) (+ count 1))\n                (helper (rest lst) count))]))\n  (helper lst 0))\n\n;; Sample Input-Output Pairs\n;; (count-negative-numbers '(1 -2 3 -4 5)) => 2\n;; (count-negative-numbers '(1 2 3 4 5)) => 0\n;; (count-negative-numbers '(-1 -2 -3 -4 -5)) => 5"
+  ],
+  "test_cases": [
+    {
+      "input": "-1 -2 3 -4 -5",
+      "output": "4"
+    },
+    {
+      "input": "1 2 3",
+      "output": "0"
+    },
+    {
+      "input": "1 2 -3 -10 20",
+      "output": "2"
+    }
+  ]
+}

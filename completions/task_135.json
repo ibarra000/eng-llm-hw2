@@ -1,0 +1,28 @@
+{
+  "task_id": 135,
+  "description": "Compute the nth hexagonal number using the formula n*(2n - 1).",
+  "input_format": "A single integer n.",
+  "output_format": "The nth hexagonal number as an integer.",
+  "prompt": "; Compute the nth hexagonal number using the formula n*(2n - 1).\n; Input format: A single integer n.\n; Output format: The nth hexagonal number as an integer.\n\n#lang racket\n\n",
+  "completions": [
+    "(define (hexagonal n)\n  (* n (- (* 2 n) 1)))\n\n;; Example usage:\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n\n;; Sample input-output pairs\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28",
+    ";; Function to compute the nth hexagonal number\n(define (hexagonal n)\n  (* n (- (* 2 n) 1)))\n\n;; Example usage:\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45\n\n;; Sample input-output pairs\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45\n\n;; Test cases\n(check-equal? (hexagonal 1) 1)\n(check-equal? (hexagonal 2) 6)\n(check-equal? (hexagonal 3) 15)\n(check-equal? (hexagonal 4) 28)\n(check-equal? (hexagonal 5) 45)",
+    "(define (hexagonal n)\n  (* n (- (* 2 n) 1)))\n\n;; Sample input-output pairs\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45\n\n;; Test cases\n(check-equal? (hexagonal 1) 1)\n(check-equal? (hexagonal 2) 6)\n(check-equal? (hexagonal 3) 15)\n(check-equal? (hexagonal 4) 28)\n(check-equal? (hexagonal 5) 45)",
+    ";; Function to compute the nth hexagonal number\n(define (hexagonal n)\n  (* n (- (* 2 n) 1)))\n\n;; Example usage:\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45\n\n;; Sample input-output pairs\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45\n\n;; Test cases\n(check-equal? (hexagonal 1) 1)\n(check-equal? (hexagonal 2) 6)\n(check-equal? (hexagonal 3) 15)\n(check-equal? (hexagonal 4) 28)\n(check-equal? (hexagonal 5) 45)",
+    "(define (hexagonal n)\n  (* n (- (* 2 n) 1)))\n\n;; Example usage:\n;; (hexagonal 1) => 1\n;; (hexagonal 2) => 6\n;; (hexagonal 3) => 15\n;; (hexagonal 4) => 28\n;; (hexagonal 5) => 45"
+  ],
+  "test_cases": [
+    {
+      "input": "10",
+      "output": "190"
+    },
+    {
+      "input": "5",
+      "output": "45"
+    },
+    {
+      "input": "7",
+      "output": "91"
+    }
+  ]
+}
